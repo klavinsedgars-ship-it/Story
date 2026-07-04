@@ -147,7 +147,7 @@
     border: 1px solid var(--line); background: var(--panel-2); padding: 0; cursor: zoom-in; display: block;
   }
   .thumb::before {
-    content: "generating…"; position: absolute; inset: 0; display: grid; place-items: center;
+    content: "loading…"; position: absolute; inset: 0; display: grid; place-items: center;
     font-size: .72rem; color: var(--faint); letter-spacing: .02em;
   }
   .thumb img { position: relative; width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0; transition: opacity .5s ease; }
@@ -412,19 +412,72 @@ function esc(str) { return String(str == null ? '' : str).replace(/[&<>"']/g, c 
 function isSaved(idea) { return state.saved.some(s => s.title === idea.title); }
 function domainOf(url) { try { return new URL(url).hostname.replace(/^www\./, ''); } catch { return ''; } }
 
-/* Keyless AI concept images (loaded as plain <img>; no key, no CORS issue) */
+/* Concept images — loaded as plain <img> (no key, no CORS/backend needed).
+   Each tile tries providers in order until one renders, so a tile always
+   fills even if the AI-gen service is rate-limited or down:
+     1) Pollinations — AI-generated concept art (best, but flaky when anonymous)
+     2) LoremFlickr  — a real photo matched to the idea's keywords (reliable)
+     3) Picsum       — a deterministic grayscale placeholder (always works)   */
 const IMG_ANGLES = [
   "product concept, studio photography, clean neutral background",
   "realistic scene of it being used in everyday life",
   "minimal brand hero shot, marketing photography",
   "close-up detail, editorial photography"
 ];
+const STOPWORDS = new Set("for and the with your you our via into onto from that this a an of to in on at by as is are new app kit clip set".split(" "));
 function hashSeed(str) { let h = 2166136261; for (let i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); } return (h >>> 0) % 100000; }
-function imgUrl(idea, angleIndex, w, h) {
-  const angle = IMG_ANGLES[angleIndex % IMG_ANGLES.length];
+function keywordsFor(idea) {
+  const words = String(idea.title).toLowerCase().replace(/[^a-z0-9 ]/g, ' ').split(/\s+/).filter(w => w.length > 3 && !STOPWORDS.has(w));
+  const kw = words.slice(0, 2);
+  if (!kw.length) kw.push(String(idea.trend).toLowerCase().split(/[\/ ]/)[0]);
+  return kw.join(',');
+}
+function pollinationsUrl(idea, i, w, h) {
+  const angle = IMG_ANGLES[i % IMG_ANGLES.length];
   const prompt = `${idea.title}. ${angle}. Concept for a ${idea.trend} business. photorealistic, high detail, no text, no watermark`;
-  const seed = (hashSeed(idea.title) + angleIndex * 7919) % 100000;
-  return `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=${w}&height=${h}&nologo=true&seed=${seed}&model=flux`;
+  const seed = (hashSeed(idea.title) + i * 7919) % 100000;
+  return `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=${w}&height=${h}&nologo=true&seed=${seed}&model=flux&referrer=trendspark`;
+}
+function loremflickrUrl(idea, i, w, h) {
+  return `https://loremflickr.com/${w}/${h}/${encodeURIComponent(keywordsFor(idea))}?lock=${(hashSeed(idea.title) + i * 13) % 100000}`;
+}
+function picsumUrl(idea, i, w, h) {
+  return `https://picsum.photos/seed/${(hashSeed(idea.title) + i * 29) % 100000}/${w}/${h}?grayscale`;
+}
+function providerUrls(idea, i) {
+  return [
+    { small: pollinationsUrl(idea, i, 480, 360), big: pollinationsUrl(idea, i, 1024, 768) },
+    { small: loremflickrUrl(idea, i, 480, 360),  big: loremflickrUrl(idea, i, 1024, 768) },
+    { small: picsumUrl(idea, i, 480, 360),       big: picsumUrl(idea, i, 1024, 768) }
+  ];
+}
+/* Try providers in order for one tile; resolve when one loads or all fail. */
+function loadThumb(thumbEl) {
+  const idea = currentBatch[+thumbEl.dataset.idea];
+  const vis = thumbEl.querySelector('img');
+  if (!idea || !vis) { thumbEl.classList.add('failed'); return Promise.resolve(); }
+  const cands = providerUrls(idea, +thumbEl.dataset.img);
+  return new Promise(resolve => {
+    let p = 0;
+    const attempt = () => {
+      if (p >= cands.length) { thumbEl.classList.add('failed'); resolve(); return; }
+      const { small, big } = cands[p++];
+      const pre = new Image();
+      let done = false;
+      const to = setTimeout(() => { if (!done) { done = true; attempt(); } }, 22000);
+      pre.onload = () => { if (done) return; done = true; clearTimeout(to); vis.src = small; vis.classList.add('loaded'); thumbEl.dataset.full = big; resolve(); };
+      pre.onerror = () => { if (done) return; done = true; clearTimeout(to); attempt(); };
+      pre.src = small;
+    };
+    attempt();
+  });
+}
+/* Throttle so we don't fire all tiles at once (which triggers rate limits). */
+async function loadAllThumbs() {
+  const thumbs = [...stage.querySelectorAll('.thumb')];
+  let idx = 0;
+  const worker = async () => { while (idx < thumbs.length) { await loadThumb(thumbs[idx++]); } };
+  await Promise.all(Array.from({ length: Math.min(3, thumbs.length) }, worker));
 }
 
 function ideaHTML(idea, index) {
@@ -438,14 +491,10 @@ function ideaHTML(idea, index) {
         `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.title || domainOf(s.url) || s.url)}</a>`).join('')}</div>` : '';
   const tierClass = ['low', 'medium', 'high'].includes(idea.investmentTier) ? idea.investmentTier : 'medium';
 
-  const thumbs = Array.from({ length: IMAGES_PER }, (_, i) => {
-    const small = imgUrl(idea, i, 480, 360);
-    const big = imgUrl(idea, i, 1024, 768);
-    return `<button class="thumb" data-full="${esc(big)}" aria-label="Concept image ${i + 1} for ${esc(idea.title)}">
-      <img src="${esc(small)}" loading="lazy" alt="${esc(idea.title)} concept ${i + 1}"
-           onload="this.classList.add('loaded')" onerror="this.closest('.thumb').classList.add('failed')" />
-    </button>`;
-  }).join('');
+  const thumbs = Array.from({ length: IMAGES_PER }, (_, i) =>
+    `<button class="thumb" data-idea="${index}" data-img="${i}" aria-label="Concept image ${i + 1} for ${esc(idea.title)}">
+       <img loading="lazy" alt="${esc(idea.title)} example ${i + 1}" />
+     </button>`).join('');
 
   return `
     <li class="idea enter" style="animation-delay:${index * 50}ms">
@@ -462,7 +511,7 @@ function ideaHTML(idea, index) {
       <p class="desc">${esc(idea.description)}</p>
       ${signalHtml}
       <div class="thumbs">${thumbs}</div>
-      <div class="thumbs-note">AI-generated concept images — illustrative only.</div>
+      <div class="thumbs-note">AI concept where available, otherwise a matched example photo — illustrative only.</div>
       <div class="statline">
         <div class="stat"><div class="stat-k">Startup cost</div><div class="stat-value">${esc(idea.investmentUSD)}</div></div>
         <div class="stat"><div class="stat-k">Monthly revenue</div><div class="stat-value">${esc(idea.avgMonthlyRevenueUSD)}</div></div>
@@ -490,8 +539,9 @@ function renderBatch(ideas, opts = {}) {
 
   document.getElementById('genMore').onclick = () => (opts.regen ? opts.regen() : null);
   stage.querySelectorAll('.save-btn').forEach(btn => { btn.onclick = () => toggleSaveByTitle(btn.getAttribute('data-title')); });
-  stage.querySelectorAll('.thumb').forEach(t => { t.onclick = () => { if (!t.classList.contains('failed')) openLightbox(t.getAttribute('data-full')); }; });
+  stage.querySelectorAll('.thumb').forEach(t => { t.onclick = () => { const full = t.getAttribute('data-full'); if (full && !t.classList.contains('failed')) openLightbox(full); }; });
   state.lastTitles = ideas.map(i => i.title);
+  loadAllThumbs();
 }
 
 function renderLoading() {
