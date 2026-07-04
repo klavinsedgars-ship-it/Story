@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>TrendSpark — Business Ideas Generator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0f1020;
+    --bg-soft: #181a30;
+    --card: #1e2138;
+    --card-2: #23273f;
+    --stroke: #2f3450;
+    --text: #eef0f7;
+    --muted: #a2a7c4;
+    --faint: #767c9e;
+    --accent: #7c5cff;
+    --accent-2: #22d3a6;
+    --accent-3: #ff8a5c;
+    --low: #22d3a6;
+    --medium: #ffb347;
+    --high: #ff6b8b;
+    --shadow: 0 20px 50px -20px rgba(0,0,0,.65);
+    --radius: 20px;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body { margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background:
+      radial-gradient(1100px 600px at 12% -8%, rgba(124,92,255,.20), transparent 60%),
+      radial-gradient(900px 500px at 100% 0%, rgba(34,211,166,.14), transparent 55%),
+      var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, .brand, .btn, .stat-value, .tier-pill {
+    font-family: 'Space Grotesk', 'Inter', sans-serif;
+  }
+
+  .wrap {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 28px 20px 80px;
+  }
+
+  /* ---------- Header ---------- */
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 26px;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1.55rem;
+    font-weight: 700;
+    letter-spacing: -.02em;
+  }
+  .spark {
+    display: grid;
+    place-items: center;
+    width: 42px; height: 42px;
+    border-radius: 13px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    box-shadow: 0 8px 24px -8px rgba(124,92,255,.8);
+    font-size: 1.25rem;
+  }
+  .brand small {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: .72rem;
+    font-weight: 500;
+    letter-spacing: .04em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  .saved-toggle {
+    display: none;
+    align-items: center;
+    gap: 8px;
+    background: var(--card);
+    border: 1px solid var(--stroke);
+    color: var(--text);
+    padding: 10px 16px;
+    border-radius: 999px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: .9rem;
+  }
+  .saved-toggle .badge {
+    background: var(--accent);
+    color: #fff;
+    border-radius: 999px;
+    padding: 1px 8px;
+    font-size: .78rem;
+    font-weight: 700;
+  }
+
+  .layout {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 26px;
+    align-items: start;
+  }
+
+  /* ---------- Controls ---------- */
+  .controls {
+    background: linear-gradient(180deg, var(--bg-soft), var(--card));
+    border: 1px solid var(--stroke);
+    border-radius: var(--radius);
+    padding: 22px;
+    box-shadow: var(--shadow);
+    margin-bottom: 22px;
+  }
+  .filter-row { margin-bottom: 18px; }
+  .filter-row:last-child { margin-bottom: 0; }
+  .filter-label {
+    font-size: .72rem;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--faint);
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .chips { display: flex; flex-wrap: wrap; gap: 9px; }
+  .chip {
+    border: 1px solid var(--stroke);
+    background: var(--card-2);
+    color: var(--muted);
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-size: .84rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all .18s ease;
+    white-space: nowrap;
+  }
+  .chip:hover { border-color: var(--accent); color: var(--text); transform: translateY(-1px); }
+  .chip.active {
+    background: linear-gradient(135deg, var(--accent), #9a7dff);
+    border-color: transparent;
+    color: #fff;
+    box-shadow: 0 6px 18px -8px rgba(124,92,255,.9);
+  }
+  .chip.tier-low.active   { background: linear-gradient(135deg,#12b48c,#22d3a6); box-shadow:0 6px 18px -8px rgba(34,211,166,.8);}
+  .chip.tier-medium.active{ background: linear-gradient(135deg,#e79521,#ffb347); box-shadow:0 6px 18px -8px rgba(255,179,71,.8);}
+  .chip.tier-high.active  { background: linear-gradient(135deg,#e04d6d,#ff6b8b); box-shadow:0 6px 18px -8px rgba(255,107,139,.8);}
+
+  .actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .btn {
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 14px 24px;
+    border-radius: 14px;
+    transition: transform .15s ease, box-shadow .2s ease, filter .2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+  }
+  .btn:active { transform: scale(.97); }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    color: #fff;
+    box-shadow: 0 12px 30px -12px rgba(124,92,255,.9);
+    flex: 1;
+    justify-content: center;
+    min-width: 200px;
+  }
+  .btn-primary:hover { filter: brightness(1.08); transform: translateY(-2px); }
+  .btn-ghost {
+    background: var(--card-2);
+    color: var(--text);
+    border: 1px solid var(--stroke);
+  }
+  .btn-ghost:hover { border-color: var(--accent-3); color: #fff; }
+  .match-count {
+    font-size: .82rem;
+    color: var(--faint);
+    margin-left: auto;
+  }
+  .match-count b { color: var(--muted); }
+
+  /* ---------- Idea card ---------- */
+  .stage { min-height: 340px; }
+  .empty-state {
+    text-align: center;
+    padding: 70px 24px;
+    color: var(--muted);
+    border: 1.5px dashed var(--stroke);
+    border-radius: var(--radius);
+    background: rgba(255,255,255,.015);
+  }
+  .empty-state .big { font-size: 2.4rem; margin-bottom: 8px; }
+  .empty-state h3 { margin: 0 0 6px; color: var(--text); }
+
+  .card {
+    background: linear-gradient(180deg, var(--card), var(--card-2));
+    border: 1px solid var(--stroke);
+    border-radius: var(--radius);
+    padding: 26px;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+  }
+  .card::before {
+    content: "";
+    position: absolute; inset: 0 0 auto 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2), var(--accent-3));
+  }
+  @keyframes pop {
+    0%   { opacity: 0; transform: translateY(18px) scale(.985); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  .card.enter { animation: pop .42s cubic-bezier(.2,.8,.2,1); }
+
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: flex-start;
+    margin-bottom: 6px;
+  }
+  .trend-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(124,92,255,.14);
+    border: 1px solid rgba(124,92,255,.35);
+    color: #c3b6ff;
+    padding: 5px 12px;
+    border-radius: 999px;
+    font-size: .76rem;
+    font-weight: 600;
+    letter-spacing: .01em;
+  }
+  .tier-pill {
+    padding: 5px 12px;
+    border-radius: 999px;
+    font-size: .74rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    border: 1px solid transparent;
+    white-space: nowrap;
+  }
+  .tier-pill.low    { color: var(--low);    background: rgba(34,211,166,.12); border-color: rgba(34,211,166,.4);}
+  .tier-pill.medium { color: var(--medium); background: rgba(255,179,71,.12); border-color: rgba(255,179,71,.4);}
+  .tier-pill.high   { color: var(--high);   background: rgba(255,107,139,.12); border-color: rgba(255,107,139,.4);}
+
+  .card h2 {
+    font-size: 1.65rem;
+    line-height: 1.15;
+    letter-spacing: -.02em;
+    margin: 12px 0 10px;
+  }
+  .card .desc {
+    color: var(--muted);
+    line-height: 1.6;
+    font-size: .98rem;
+    margin: 0 0 18px;
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+  .stat {
+    background: rgba(255,255,255,.03);
+    border: 1px solid var(--stroke);
+    border-radius: 14px;
+    padding: 13px 14px;
+  }
+  .stat-label {
+    font-size: .68rem;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--faint);
+    font-weight: 600;
+    margin-bottom: 5px;
+    display: flex; align-items: center; gap: 5px;
+  }
+  .stat-value {
+    font-size: 1.02rem;
+    font-weight: 600;
+    letter-spacing: -.01em;
+  }
+  .stat.rev .stat-value { color: var(--accent-2); }
+  .stat.profit .stat-value { color: #ffd479; }
+
+  .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 22px;
+    padding: 16px 0;
+    border-top: 1px solid var(--stroke);
+    border-bottom: 1px solid var(--stroke);
+    margin-bottom: 18px;
+  }
+  .meta {
+    font-size: .9rem;
+    color: var(--muted);
+  }
+  .meta b { color: var(--text); font-weight: 600; }
+  .meta .k {
+    display: block;
+    font-size: .68rem;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--faint);
+    font-weight: 600;
+    margin-bottom: 3px;
+  }
+
+  .skills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+  .skill {
+    font-size: .78rem;
+    color: var(--muted);
+    background: rgba(255,255,255,.04);
+    border: 1px solid var(--stroke);
+    padding: 5px 11px;
+    border-radius: 8px;
+  }
+
+  .card-actions { display: flex; gap: 12px; }
+  .save-btn {
+    background: var(--card-2);
+    border: 1px solid var(--stroke);
+    color: var(--text);
+    padding: 11px 20px;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all .18s ease;
+  }
+  .save-btn:hover { border-color: var(--accent-3); }
+  .save-btn.saved {
+    background: rgba(255,138,92,.15);
+    border-color: var(--accent-3);
+    color: #ffb99a;
+  }
+
+  /* ---------- Saved panel ---------- */
+  .side {
+    background: linear-gradient(180deg, var(--bg-soft), var(--card));
+    border: 1px solid var(--stroke);
+    border-radius: var(--radius);
+    padding: 20px;
+    box-shadow: var(--shadow);
+    position: sticky;
+    top: 20px;
+  }
+  .side h3 {
+    margin: 0 0 4px;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .side .sub { font-size: .8rem; color: var(--faint); margin: 0 0 16px; }
+  .saved-empty {
+    color: var(--faint);
+    font-size: .88rem;
+    text-align: center;
+    padding: 30px 10px;
+    line-height: 1.5;
+  }
+  .saved-list { display: flex; flex-direction: column; gap: 11px; }
+  .saved-item {
+    background: var(--card-2);
+    border: 1px solid var(--stroke);
+    border-radius: 13px;
+    padding: 13px 14px;
+    position: relative;
+  }
+  .saved-item h4 {
+    margin: 0 0 5px;
+    font-size: .95rem;
+    line-height: 1.25;
+    padding-right: 22px;
+  }
+  .saved-item .st {
+    font-size: .74rem;
+    color: var(--faint);
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .saved-item .st .rev { color: var(--accent-2); font-weight: 600; }
+  .remove {
+    position: absolute;
+    top: 10px; right: 10px;
+    background: none;
+    border: none;
+    color: var(--faint);
+    cursor: pointer;
+    font-size: 1.1rem;
+    line-height: 1;
+    padding: 2px 5px;
+    border-radius: 6px;
+  }
+  .remove:hover { color: var(--high); background: rgba(255,107,139,.1); }
+
+  .disclaimer {
+    text-align: center;
+    color: var(--faint);
+    font-size: .78rem;
+    margin-top: 30px;
+    line-height: 1.5;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 900px) {
+    .layout { grid-template-columns: 1fr; }
+    .side { position: relative; top: 0; display: none; }
+    .side.open { display: block; }
+    .saved-toggle { display: inline-flex; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 520px) {
+    .wrap { padding: 20px 14px 60px; }
+    .card { padding: 20px; }
+    .card h2 { font-size: 1.35rem; }
+    .btn-primary { min-width: unset; }
+    .match-count { width: 100%; margin-left: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand">
+      <div class="spark">✦</div>
+      <div>
+        TrendSpark
+        <small>Non-obvious business ideas</small>
+      </div>
+    </div>
+    <button class="saved-toggle" id="savedToggle">
+      ★ Saved <span class="badge" id="savedBadge">0</span>
+    </button>
+  </header>
+
+  <div class="layout">
+    <main>
+      <section class="controls">
+        <div class="filter-row">
+          <div class="filter-label">Investment tier</div>
+          <div class="chips" id="tierChips"></div>
+        </div>
+        <div class="filter-row">
+          <div class="filter-label">Trend category</div>
+          <div class="chips" id="trendChips"></div>
+        </div>
+        <div class="actions">
+          <button class="btn btn-primary" id="generateBtn">⚡ Generate Idea</button>
+          <button class="btn btn-ghost" id="surpriseBtn">🎲 Surprise me</button>
+          <span class="match-count" id="matchCount"></span>
+        </div>
+      </section>
+
+      <section class="stage" id="stage">
+        <div class="empty-state">
+          <div class="big">💡</div>
+          <h3>Ready when you are</h3>
+          <p>Set your filters and hit <b>Generate Idea</b> — or roll the dice with <b>Surprise me</b>.</p>
+        </div>
+      </section>
+
+      <p class="disclaimer">
+        All financial figures are rough, illustrative estimates — not guarantees or investment advice.
+        Real results vary by market, execution, and effort.
+      </p>
+    </main>
+
+    <aside class="side" id="sidePanel">
+      <h3>★ Saved ideas</h3>
+      <p class="sub">Bookmarks live in memory for this session only.</p>
+      <div id="savedContainer">
+        <div class="saved-empty">Nothing saved yet.<br />Hit <b>Save</b> on any idea you like.</div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   DATA — curated, non-obvious, globally viable business ideas
+   ============================================================ */
+const IDEAS = [
+  {
+    title: "AI Grant-Writing Copilot for Small NGOs",
+    trend: "AI",
+    description: "A subscription tool that ingests a nonprofit's mission and past reports, then drafts tailored grant applications matched to open funding calls. It handles the tedious boilerplate so tiny NGOs can compete with well-staffed ones.",
+    investmentUSD: "$3,000 – $9,000",
+    investmentTier: "medium",
+    avgMonthlyRevenueUSD: "$4,000 – $12,000",
+    avgMonthlyProfitUSD: "$2,500 – $8,000",
+    timeToProfit: "4–7 months",
+    whyGlobal: "Grant-seeking nonprofits exist in every country and mostly write in English or a handful of major languages.",
+    skillsNeeded: ["Prompt engineering", "No-code SaaS", "B2B sales"]
+  },
+  {
+    title: "Localized Voice-Cloning for Indie Audiobook Authors",
+    trend: "Creator economy",
+    description: "A service that turns self-published ebooks into narrated audiobooks using licensed AI voices in the author's accent and language. Authors get audiobook revenue without paying $3k+ for studio narration.",
+    investmentUSD: "$1,500 – $5,000",
+    investmentTier: "low",
+    avgMonthlyRevenueUSD: "$3,000 – $9,000",
+    avgMonthlyProfitUSD: "$2,000 – $6,000",
+    timeToProfit: "2–5 months",
+    whyGlobal: "Self-publishing platforms are worldwide and audiobook demand is growing in every major language.",
+    skillsNeeded: ["Audio editing", "AI tools", "Author outreach"]
+  },
+  {
+    title: "Micro-SaaS for Physiotherapy Home-Exercise Plans",
+    trend: "Health/longevity",
+    description: "A lightweight web app where physiotherapists assemble illustrated home-exercise programs and send patients a private link with video reminders. It replaces printed PDFs and boosts patient adherence.",
+    investmentUSD: "$5,000 – $15,000",
+    investmentTier: "high",
+    avgMonthlyRevenueUSD: "$6,000 – $18,000",
+    avgMonthlyProfitUSD: "$4,000 – $12,000",
+    timeToProfit: "6–10 months",
+    whyGlobal: "Physiotherapy is a universal profession and exercise videos translate across borders easily.",
+    skillsNeeded: ["Web development", "UX design", "Healthcare sales"]
+  },
+  {
+    title: "Carbon-Footprint Labeling for Small E-commerce Brands",
+    trend: "Climate/sustainability",
+    description: "A plug-in that estimates and displays a per-product carbon footprint badge on independent online stores. Eco-conscious shoppers convert better, and brands get a marketing edge without hiring consultants.",
+    investmentUSD: "$4,000 – $11,000",
+    investmentTier: "medium",
+    avgMonthlyRevenueUSD: "$3,500 – $11,000",
+    avgMonthlyProfitUSD: "$2,000 – $7,000",
+    timeToProfit: "5–9 months",
+    whyGlobal: "E-commerce platforms are global and sustainability messaging resonates across most consumer markets.",
+    skillsNeeded: ["App integrations", "Lifecycle basics", "Content marketing"]
+  },
+  {
+    title: "Async Onboarding Video Library for Remote Teams",
+    trend: "Remote work",
+    description: "A done-for-you service that produces a modular library of short onboarding videos so distributed startups stop repeating the same live calls. Includes a searchable portal and quarterly refreshes.",
+    investmentUSD: "$2,000 – $7,000",
+    investmentTier: "low",
+    avgMonthlyRevenueUSD: "$4,000 – $10,000",
+    avgMonthlyProfitUSD: "$2,800 – $7,000",
+    timeToProfit: "3–6 months",
+    whyGlobal: "Remote-first companies hire globally and onboarding pain is universal across time zones.",
+    skillsNeeded: ["Video production", "Instructional design", "B2B outreach"]
+  },
+  {
+    title: "Digital Reminiscence Kits for Elder-Care Homes",
+    trend: "Aging population",
+    description: "Themed multimedia packs (music, photos, prompts by decade and region) that care homes use for dementia reminiscence therapy on a tablet. Sold as a recurring content subscription per facility.",
+    investmentUSD: "$2,500 – $8,000",
+    investmentTier: "medium",
+    avgMonthlyRevenueUSD: "$3,000 – $9,000",
+    avgMonthlyProfitUSD: "$2,000 – $6,000",
+    timeToProfit: "4–8 months",
+    whyGlobal: "Aging populations and care homes exist worldwide; content can be localized by era and geography.",
+    skillsNeeded: ["Content curation", "Licensing", "Care-sector sales"]
+  },
+  {
+    title: "Compliance-Doc Translator for Cross-Border Freelancers",
+    trend: "Niche B2B services",
+    description: "A specialized service that turns invoices, contracts, and tax forms into the formats clients in other countries expect. It removes the friction that makes companies hesitant to hire foreign contractors.",
+    investmentUSD: "$1,000 – $4,000",
+    investmentTier: "low",
+    avgMonthlyRevenueUSD: "$2,500 – $7,000",
+    avgMonthlyProfitUSD: "$1,800 – $5,000",
+    timeToProfit: "2–4 months",
+    whyGlobal: "Cross-border freelancing is exploding and every corridor has document-format mismatches.",
+    skillsNeeded: ["Bookkeeping basics", "Localization", "Freelance networking"]
+  },
+  {
+    title: "AI Menu Photography for Small Restaurants",
+    trend: "AI",
+    description: "Restaurant owners upload a phone snapshot of a dish and receive polished, delivery-app-ready photos generated and retouched by AI. It replaces expensive food-photographer shoots for tiny kitchens.",
+    investmentUSD: "$1,500 – $5,000",
+    investmentTier: "low",
+    avgMonthlyRevenueUSD: "$3,000 – $8,500",
+    avgMonthlyProfitUSD: "$2,200 – $6,000",
+    timeToProfit: "2–5 months",
+    whyGlobal: "Delivery apps are worldwide and every city has thousands of small restaurants needing better photos.",
+    skillsNeeded: ["AI image tools", "Photo retouching", "Local sales"]
+  },
+  {
+    title: "Subscription Skill-Tree Courses for Niche Trades",
+    trend: "Creator economy",
+    description: "Structured, gamified micro-courses for overlooked trades like watch repair, espresso-machine servicing, or drone maintenance. Learners progress through a visual skill tree with certificates.",
+    investmentUSD: "$3,000 – $9,000",
+    investmentTier: "medium",
+    avgMonthlyRevenueUSD: "$4,000 – $13,000",
+    avgMonthlyProfitUSD: "$2,800 – $9,000",
+    timeToProfit: "4–8 months",
+    whyGlobal: "Niche trade skills are in demand everywhere and video courses cross borders effortlessly.",
+    skillsNeeded: ["Curriculum design", "Video", "Community building"]
+  },
+  {
+    title: "Longevity Habit-Tracking for Corporate Wellness",
+    trend: "Health/longevity",
+    description: "A white-label app that lets mid-size employers run evidence-based longevity challenges (sleep, movement, nutrition) with team leaderboards. Sold per-seat to HR departments as a retention perk.",
+    investmentUSD: "$6,000 – $16,000",
+    investmentTier: "high",
+    avgMonthlyRevenueUSD: "$7,000 – $20,000",
+    avgMonthlyProfitUSD: "$4,500 – $13,000",
+    timeToProfit: "6–11 months",
+    whyGlobal: "Corporate wellness budgets exist across developed and emerging markets alike.",
+    skillsNeeded: ["App development", "Health science", "Enterprise sales"]
+  },
+  {
+    title: "AI-Assisted Lease Review for Small Landlords",
+    trend: "AI",
+    description: "Independent landlords upload a tenancy agreement and get a plain-language risk summary plus suggested clauses. It gives non-professional landlords lawyer-lite confidence for a small monthly fee.",
+    investmentUSD: "$4,000 – $12,000",
+    investmentTier: "medium",
+    avgMonthlyRevenueUSD: "$4,500 – $12,000",
+    avgMonthlyProfitUSD: "$3,000 – $8,000",
+    timeToProfit: "5–9 months",
+    whyGlobal: "Renting is universal; the tool flags risks generically without giving jurisdiction-specific legal advice.",
+    skillsNeeded: ["Prompt engineering", "Legal-tech UX", "Content marketing"]
+  },
+  {
+    title: "Remote-Team Timezone Ritual Designer",
+    trend: "Remote work",
+    description: "A consulting-plus-templates product that designs async rituals, handoff docs, and meeting-free workflows for globally distributed teams. Delivered as a playbook subscription with quarterly tune-ups.",
+    investmentUSD: "$1,000 – $4,000",
+    investmentTier: "low",
+    avgMonthlyRevenueUSD: "$3,500 – $9,000",
+    avgMonthlyProfitUSD: "$2,800 – $7,000",
+    timeToProfit: "2–5 months",
+    whyGlobal: "Any company with people in two time zones is a customer, and that's most of them now.",
+    skillsNeeded: ["Ops consulting", "Writing", "Facilitation"]
+  },
+  {
+    title: "Repair-Cafe Booking Platform for Circular Economy",
+    trend: "Climate/sustainability",
+    description: "A booking and inventory tool for the growing network of community repair cafes, tracking fixers' skills, spare parts, and appointment slots. Monetized via a modest per-location SaaS fee.",
+    investmentUSD: "$3,500 – $10,000",
+    investmentTier: "medium",
+    avgMonthlyRevenueUSD: "$3,000 – $8,000",
+    avgMonthlyProfitUSD: "$2,000 – $5,500",
+    timeToProfit: "5–9 months",
+    whyGlobal: "The repair-cafe movement spans dozens of countries and keeps expanding as e-waste concern grows.",
+    skillsNeeded: ["Web development", "Community ops", "Partnerships"]
+  },
+  {
+    title: "Personalized Children's Storybooks in Minority Languages",
+    trend: "Creator economy",
+    description: "Print-on-demand and digital children's books personalized with a child's name and generated in under-served regional languages. Diaspora parents pay a premium to keep heritage languages alive.",
+    investmentUSD: "$2,000 – $6,000",
+    investmentTier: "low",
+    avgMonthlyRevenueUSD: "$3,000 – $9,000",
+    avgMonthlyProfitUSD: "$2,000 – $6,000",
+    timeToProfit: "3–6 months",
+    whyGlobal: "Diaspora communities everywhere want heritage-language content for their kids; POD ships worldwide.",
+    skillsNeeded: ["Illustration/AI art", "Translation coordination", "Marketing"]
+  },
+  {
+    title: "AI Interview-Prep Simulator for Trade Certifications",
+    trend: "AI",
+    description: "A voice-based practice tool that runs realistic oral exams for trades and professional certs (nursing boards, electrician licenses, aviation English). Learners drill until confident with instant feedback.",
+    investmentUSD: "$5,000 – $14,000",
+    investmentTier: "high",
+    avgMonthlyRevenueUSD: "$6,000 – $17,000",
+    avgMonthlyProfitUSD: "$4,000 – $11,000",
+    timeToProfit: "6–10 months",
+    whyGlobal: "Certification exams exist globally and English-proficiency drilling has cross-border demand.",
+    skillsNeeded: ["Conversational AI", "Assessment design", "Niche marketing"]
+  },
+  {
+    title: "Micro-Influencer UGC Matching for D2C Brands",
+    trend: "Creator economy",
+    description: "A curated marketplace connecting small direct-to-consumer brands with vetted micro-creators who produce authentic user-generated content. Focuses on quality vetting rather than mass volume.",
+    investmentUSD: "$3,000 – $9,000",
+    investmentTier: "medium",
+    avgMonthlyRevenueUSD: "$4,500 – $13,000",
+    avgMonthlyProfitUSD: "$3,000 – $9,000",
+    timeToProfit: "4–8 months",
+    whyGlobal: "Creators and D2C brands are everywhere; matching happens entirely online.",
+    skillsNeeded: ["Marketplace ops", "Creator relations", "Vetting"]
+  },
+  {
+    title: "Cognitive-Games Subscription for Active Seniors",
+    trend: "Aging population",
+    description: "A curated, ad-free subscription of scientifically-designed brain games with large fonts and family progress-sharing. Adult children buy it as a gift subscription for aging parents.",
+    investmentUSD: "$4,000 – $12,000",
+    investmentTier: "medium",
+    avgMonthlyRevenueUSD: "$4,000 – $12,000",
+    avgMonthlyProfitUSD: "$2,800 – $8,000",
+    timeToProfit: "5–9 months",
+    whyGlobal: "Aging is universal and 'gift for a parent' purchasing behavior crosses cultures.",
+    skillsNeeded: ["Game design", "UX for seniors", "Subscription marketing"]
+  },
+  {
+    title: "Freelancer Retirement & Tax-Savings Guidance Portal",
+    trend: "Niche B2B services",
+    description: "An educational subscription that helps independent workers understand savings, buffers, and tax-setaside strategies with country-agnostic frameworks and calculators. Not advice — structured self-education.",
+    investmentUSD: "$2,000 – $7,000",
+    investmentTier: "low",
+    avgMonthlyRevenueUSD: "$3,000 – $9,000",
+    avgMonthlyProfitUSD: "$2,200 – $6,500",
+    timeToProfit: "4–7 months",
+    whyGlobal: "The freelance workforce is booming worldwide and financial anxiety is a shared pain point.",
+    skillsNeeded: ["Financial literacy", "Content creation", "Community"]
+  },
+  {
+    title: "AI Product-Description Localizer for Marketplace Sellers",
+    trend: "AI",
+    description: "A tool that rewrites and culturally adapts product listings for sellers expanding into new-country marketplaces, tuning tone, units, and search keywords. It turns one listing into a dozen localized ones.",
+    investmentUSD: "$3,000 – $9,000",
+    investmentTier: "medium",
+    avgMonthlyRevenueUSD: "$4,000 – $12,000",
+    avgMonthlyProfitUSD: "$2,800 – $8,500",
+    timeToProfit: "3–7 months",
+    whyGlobal: "Cross-border marketplace selling is the default now; localization pain is everywhere.",
+    skillsNeeded: ["NLP tooling", "SEO", "E-commerce knowledge"]
+  },
+  {
+    title: "Sustainable-Packaging Sourcing Concierge",
+    trend: "Climate/sustainability",
+    description: "A concierge service that matches small product brands with vetted eco-packaging suppliers and negotiates small-batch minimums. Brands skip weeks of research and get greener without huge orders.",
+    investmentUSD: "$2,000 – $6,000",
+    investmentTier: "low",
+    avgMonthlyRevenueUSD: "$3,500 – $10,000",
+    avgMonthlyProfitUSD: "$2,500 – $7,000",
+    timeToProfit: "3–6 months",
+    whyGlobal: "Small product brands worldwide face the same sustainable-packaging sourcing headache.",
+    skillsNeeded: ["Supply-chain research", "Negotiation", "Sales"]
+  },
+  {
+    title: "Virtual Coworking Rooms for Solo Neurodivergent Workers",
+    trend: "Remote work",
+    description: "Themed body-doubling video rooms with structured focus sprints, designed specifically for ADHD and autistic remote workers. Membership includes accountability pods and sensory-friendly settings.",
+    investmentUSD: "$1,500 – $5,000",
+    investmentTier: "low",
+    avgMonthlyRevenueUSD: "$3,000 – $9,000",
+    avgMonthlyProfitUSD: "$2,200 – $6,500",
+    timeToProfit: "3–6 months",
+    whyGlobal: "Neurodivergent remote workers exist everywhere and value belonging over locale.",
+    skillsNeeded: ["Community building", "Facilitation", "Light dev"]
+  },
+  {
+    title: "AI-Powered Estate-Cleanout Valuation Assistant",
+    trend: "Aging population",
+    description: "Families photograph a deceased or downsizing relative's belongings and get AI-assisted resale valuations plus channel recommendations. It turns overwhelming cleanouts into an organized, monetizable process.",
+    investmentUSD: "$4,000 – $12,000",
+    investmentTier: "medium",
+    avgMonthlyRevenueUSD: "$4,500 – $13,000",
+    avgMonthlyProfitUSD: "$3,000 – $9,000",
+    timeToProfit: "5–9 months",
+    whyGlobal: "Downsizing and inheritance cleanouts are universal life events in aging societies.",
+    skillsNeeded: ["AI image recognition", "Resale markets", "Empathetic UX"]
+  },
+  {
+    title: "Niche Newsletter Ghostwriting for B2B Founders",
+    trend: "Niche B2B services",
+    description: "A productized service turning busy technical founders' voice notes into a polished weekly authority newsletter. Founders build audience and inbound leads without spending hours writing.",
+    investmentUSD: "$500 – $3,000",
+    investmentTier: "low",
+    avgMonthlyRevenueUSD: "$4,000 – $11,000",
+    avgMonthlyProfitUSD: "$3,200 – $8,500",
+    timeToProfit: "2–4 months",
+    whyGlobal: "B2B founders everywhere want thought-leadership presence and hate writing.",
+    skillsNeeded: ["Ghostwriting", "Interviewing", "Content strategy"]
+  },
+  {
+    title: "Telehealth Waiting-Room Content Network",
+    trend: "Health/longevity",
+    description: "Curated, condition-relevant educational micro-content shown to patients during telehealth waiting periods, sold to clinics as an engagement and adherence tool. Clinics look polished; patients stay informed.",
+    investmentUSD: "$5,000 – $14,000",
+    investmentTier: "high",
+    avgMonthlyRevenueUSD: "$6,000 – $16,000",
+    avgMonthlyProfitUSD: "$4,000 – $10,500",
+    timeToProfit: "6–10 months",
+    whyGlobal: "Telehealth adoption is worldwide and clinics everywhere want patient-engagement tools.",
+    skillsNeeded: ["Content production", "Health compliance basics", "Clinic sales"]
+  },
+  {
+    title: "AI Meeting-to-Wiki Converter for Small Agencies",
+    trend: "AI",
+    description: "A tool that turns recurring client-call recordings into a living, searchable knowledge wiki so agencies stop losing decisions in chat threads. Institutional memory becomes an asset instead of a liability.",
+    investmentUSD: "$4,000 – $11,000",
+    investmentTier: "medium",
+    avgMonthlyRevenueUSD: "$4,500 – $13,000",
+    avgMonthlyProfitUSD: "$3,000 – $9,000",
+    timeToProfit: "4–8 months",
+    whyGlobal: "Agencies everywhere drown in unstructured meeting knowledge.",
+    skillsNeeded: ["AI summarization", "Integrations", "B2B sales"]
+  },
+  {
+    title: "Micro-Retreat Planning for Remote Team Offsites",
+    trend: "Remote work",
+    description: "A done-for-you planning service for small distributed teams' in-person offsites — venue shortlists, agendas, and logistics packaged by budget tier. Founders get a great offsite without the coordination nightmare.",
+    investmentUSD: "$1,000 – $4,000",
+    investmentTier: "low",
+    avgMonthlyRevenueUSD: "$4,000 – $11,000",
+    avgMonthlyProfitUSD: "$3,000 – $8,000",
+    timeToProfit: "2–5 months",
+    whyGlobal: "Remote teams everywhere gather periodically and dread planning it.",
+    skillsNeeded: ["Event planning", "Vendor networks", "Ops"]
+  },
+  {
+    title: "Regenerative-Farming Data Dashboards for Smallholders",
+    trend: "Climate/sustainability",
+    description: "A simple mobile dashboard that helps small farms log soil, cover-crop, and yield data to qualify for regenerative-ag premiums and carbon programs. It turns good practices into documented, sellable proof.",
+    investmentUSD: "$6,000 – $16,000",
+    investmentTier: "high",
+    avgMonthlyRevenueUSD: "$5,000 – $15,000",
+    avgMonthlyProfitUSD: "$3,000 – $10,000",
+    timeToProfit: "7–12 months",
+    whyGlobal: "Smallholder farms and regenerative premiums are expanding across many regions.",
+    skillsNeeded: ["Mobile dev", "Agronomy basics", "Field partnerships"]
+  },
+  {
+    title: "Portfolio-Site Builder for Overlooked Professions",
+    trend: "Creator economy",
+    description: "A template-driven site builder tailored to professions ignored by generic tools — tattoo artists, dog trainers, session musicians, home chefs. Each vertical gets purpose-built layouts and booking widgets.",
+    investmentUSD: "$4,000 – $11,000",
+    investmentTier: "medium",
+    avgMonthlyRevenueUSD: "$4,500 – $14,000",
+    avgMonthlyProfitUSD: "$3,000 – $9,500",
+    timeToProfit: "5–9 months",
+    whyGlobal: "Every profession exists globally and craving a professional online presence.",
+    skillsNeeded: ["Web development", "Vertical marketing", "Design"]
+  },
+  {
+    title: "AI Symptom-Journaling Companion for Chronic Illness",
+    trend: "Health/longevity",
+    description: "A gentle daily-check-in app that helps chronic-illness patients log symptoms and generates clear summaries to bring to doctor visits. It improves appointments without offering diagnoses.",
+    investmentUSD: "$5,000 – $14,000",
+    investmentTier: "high",
+    avgMonthlyRevenueUSD: "$5,500 – $15,000",
+    avgMonthlyProfitUSD: "$3,500 – $10,000",
+    timeToProfit: "6–11 months",
+    whyGlobal: "Chronic illness is universal and the doctor-communication gap exists everywhere.",
+    skillsNeeded: ["App development", "Health UX", "Community trust"]
+  },
+  {
+    title: "Second-Career Coaching for Retiring Professionals",
+    trend: "Aging population",
+    description: "A structured coaching program helping 55+ professionals convert their expertise into consulting, board roles, or teaching. Combines cohort courses with a peer community of encore-career seekers.",
+    investmentUSD: "$1,500 – $5,000",
+    investmentTier: "low",
+    avgMonthlyRevenueUSD: "$4,000 – $12,000",
+    avgMonthlyProfitUSD: "$3,000 – $9,000",
+    timeToProfit: "3–6 months",
+    whyGlobal: "Aging professionals seeking encore careers are a growing global cohort.",
+    skillsNeeded: ["Coaching", "Curriculum", "Community"]
+  },
+  {
+    title: "Automated Testimonial-Collection Widget for Freelancers",
+    trend: "Niche B2B services",
+    description: "A tool that nudges clients at the right moment and collects polished video or text testimonials, then formats them for portfolios and proposals. Freelancers finally capture social proof they usually forget to ask for.",
+    investmentUSD: "$2,500 – $8,000",
+    investmentTier: "medium",
+    avgMonthlyRevenueUSD: "$3,500 – $10,000",
+    avgMonthlyProfitUSD: "$2,500 – $7,000",
+    timeToProfit: "4–7 months",
+    whyGlobal: "Every freelancer worldwide needs social proof and struggles to gather it.",
+    skillsNeeded: ["SaaS development", "Marketing automation", "Freelance outreach"]
+  },
+  {
+    title: "Hyperlocal AI Trip-Itinerary Kits for Boutique Hotels",
+    trend: "AI",
+    description: "Boutique hotels offer guests AI-generated, taste-matched local itineraries branded to the property. It boosts guest satisfaction and reviews while giving small hotels a tech edge over chains.",
+    investmentUSD: "$3,000 – $9,000",
+    investmentTier: "medium",
+    avgMonthlyRevenueUSD: "$4,000 – $12,000",
+    avgMonthlyProfitUSD: "$2,800 – $8,000",
+    timeToProfit: "4–8 months",
+    whyGlobal: "Boutique hotels exist in every tourist destination and compete on guest experience.",
+    skillsNeeded: ["AI tooling", "Hospitality sales", "Local content"]
+  },
+  {
+    title: "Digital Wardrobe & Resale Assistant for Slow Fashion",
+    trend: "Climate/sustainability",
+    description: "An app that catalogs a user's wardrobe, suggests outfit combinations to maximize wear, and streamlines reselling unused pieces. It nudges conscious consumption while making resale frictionless.",
+    investmentUSD: "$5,000 – $13,000",
+    investmentTier: "high",
+    avgMonthlyRevenueUSD: "$5,000 – $14,000",
+    avgMonthlyProfitUSD: "$3,000 – $9,000",
+    timeToProfit: "6–10 months",
+    whyGlobal: "Wardrobe overload and resale interest are global consumer trends.",
+    skillsNeeded: ["Mobile dev", "Fashion UX", "Marketplace integration"]
+  },
+  {
+    title: "Voice-First Recipe Coaching for Low-Vision Cooks",
+    trend: "Health/longevity",
+    description: "A hands-free, voice-guided cooking assistant designed for low-vision and elderly users, reading steps aloud and answering questions mid-recipe. It restores independent cooking for an underserved group.",
+    investmentUSD: "$4,000 – $11,000",
+    investmentTier: "medium",
+    avgMonthlyRevenueUSD: "$3,500 – $10,000",
+    avgMonthlyProfitUSD: "$2,400 – $7,000",
+    timeToProfit: "5–9 months",
+    whyGlobal: "Low-vision and aging cooks exist everywhere and voice interfaces cross language lines.",
+    skillsNeeded: ["Voice UI", "Accessibility design", "Content"]
+  },
+  {
+    title: "Cohort-Based Micro-Apprenticeships in Emerging Tools",
+    trend: "Creator economy",
+    description: "Short, project-based apprenticeship cohorts teaching fast-moving skills (AI workflow design, no-code automation) where learners ship a real deliverable. Employers scout graduates from a talent showcase.",
+    investmentUSD: "$2,000 – $7,000",
+    investmentTier: "low",
+    avgMonthlyRevenueUSD: "$4,500 – $13,000",
+    avgMonthlyProfitUSD: "$3,200 – $9,000",
+    timeToProfit: "3–6 months",
+    whyGlobal: "Demand for emerging-tool skills is global and cohorts run fully online.",
+    skillsNeeded: ["Teaching", "Community", "Employer relations"]
+  },
+  {
+    title: "Compliance-Ready SOP Generator for Small Clinics",
+    trend: "Niche B2B services",
+    description: "A guided tool that helps small medical, dental, and veterinary practices generate standard-operating-procedure documents from templates. It replaces expensive consultants for routine documentation.",
+    investmentUSD: "$4,000 – $12,000",
+    investmentTier: "medium",
+    avgMonthlyRevenueUSD: "$4,500 – $13,000",
+    avgMonthlyProfitUSD: "$3,000 – $9,000",
+    timeToProfit: "5–9 months",
+    whyGlobal: "Small clinics everywhere need documented procedures; templates stay jurisdiction-neutral.",
+    skillsNeeded: ["Document automation", "Healthcare ops", "Sales"]
+  },
+  {
+    title: "Async Language-Exchange for Professional Vocabulary",
+    trend: "Remote work",
+    description: "A platform pairing professionals to swap industry-specific vocabulary practice (medical French, legal Spanish) through short async voice exchanges. It targets career-critical fluency, not tourist phrases.",
+    investmentUSD: "$3,000 – $9,000",
+    investmentTier: "medium",
+    avgMonthlyRevenueUSD: "$3,500 – $11,000",
+    avgMonthlyProfitUSD: "$2,500 – $7,500",
+    timeToProfit: "4–8 months",
+    whyGlobal: "Professionals worldwide need domain-specific second-language fluency to work globally.",
+    skillsNeeded: ["Platform dev", "Language pedagogy", "Community"]
+  },
+  {
+    title: "Smart Medication-Schedule Cards for Caregivers",
+    trend: "Aging population",
+    description: "A print-and-app hybrid that generates clear, large-format medication schedules and refill reminders for family caregivers managing elderly relatives. It reduces dangerous dosing mistakes at home.",
+    investmentUSD: "$3,000 – $8,000",
+    investmentTier: "medium",
+    avgMonthlyRevenueUSD: "$3,000 – $9,000",
+    avgMonthlyProfitUSD: "$2,000 – $6,000",
+    timeToProfit: "4–8 months",
+    whyGlobal: "Home caregiving for elders is a universal and growing responsibility.",
+    skillsNeeded: ["App/print design", "Caregiver UX", "Marketing"]
+  },
+  {
+    title: "AI Pitch-Deck Red-Team for Early Founders",
+    trend: "AI",
+    description: "Founders submit a pitch deck and receive a brutal-but-constructive investor-style critique with objection lists and fix suggestions. It's a cheap dress rehearsal before real investor meetings.",
+    investmentUSD: "$2,000 – $6,000",
+    investmentTier: "low",
+    avgMonthlyRevenueUSD: "$3,500 – $10,000",
+    avgMonthlyProfitUSD: "$2,700 – $7,500",
+    timeToProfit: "2–5 months",
+    whyGlobal: "Startup founders raising capital exist in every ecosystem and fear investor scrutiny.",
+    skillsNeeded: ["Prompt engineering", "Fundraising knowledge", "Content"]
+  },
+  {
+    title: "Zero-Waste Meal-Prep Systems for Small Cafes",
+    trend: "Climate/sustainability",
+    description: "A subscription toolkit of recipes, prep sheets, and inventory templates that help small cafes slash food waste and cost. Savings pay for the subscription many times over.",
+    investmentUSD: "$1,500 – $5,000",
+    investmentTier: "low",
+    avgMonthlyRevenueUSD: "$3,000 – $8,500",
+    avgMonthlyProfitUSD: "$2,200 – $6,000",
+    timeToProfit: "3–6 months",
+    whyGlobal: "Food waste hurts every cafe's margins regardless of country.",
+    skillsNeeded: ["Culinary ops", "Content", "Hospitality sales"]
+  },
+  {
+    title: "Micro-SaaS for Music-Teacher Studio Management",
+    trend: "Niche B2B services",
+    description: "A lightweight scheduling, invoicing, and practice-tracking app built specifically for independent music teachers. It replaces messy spreadsheets and awkward payment chasing.",
+    investmentUSD: "$4,000 – $11,000",
+    investmentTier: "medium",
+    avgMonthlyRevenueUSD: "$4,000 – $12,000",
+    avgMonthlyProfitUSD: "$2,800 – $8,500",
+    timeToProfit: "5–9 months",
+    whyGlobal: "Independent music teachers operate everywhere and share the same admin pains.",
+    skillsNeeded: ["SaaS development", "Niche marketing", "UX"]
+  },
+  {
+    title: "Digital Legacy & Memory-Vault Service",
+    trend: "Aging population",
+    description: "A guided service helping people record life stories, letters, and instructions into an organized digital vault released to loved ones on chosen dates. It packages estate wishes and memories with warmth.",
+    investmentUSD: "$4,000 – $12,000",
+    investmentTier: "medium",
+    avgMonthlyRevenueUSD: "$4,000 – $12,000",
+    avgMonthlyProfitUSD: "$2,800 – $8,000",
+    timeToProfit: "5–10 months",
+    whyGlobal: "The desire to preserve memory and legacy is deeply universal across cultures.",
+    skillsNeeded: ["Secure app dev", "Storytelling", "Sensitive marketing"]
+  },
+  {
+    title: "AI Accessibility Auditor for Small Websites",
+    trend: "AI",
+    description: "An affordable automated audit that scans small-business sites for accessibility gaps and delivers prioritized, plain-language fixes. It helps tiny businesses become inclusive and reduce legal exposure.",
+    investmentUSD: "$3,500 – $10,000",
+    investmentTier: "medium",
+    avgMonthlyRevenueUSD: "$4,000 – $12,000",
+    avgMonthlyProfitUSD: "$2,800 – $8,500",
+    timeToProfit: "4–8 months",
+    whyGlobal: "Web accessibility awareness is rising globally and small sites can't afford big consultancies.",
+    skillsNeeded: ["Accessibility standards", "Automation", "SMB sales"]
+  },
+  {
+    title: "Sabbatical-Planning Concierge for Burnt-Out Workers",
+    trend: "Remote work",
+    description: "A structured planning service that helps professionals design, budget, and execute a career sabbatical without derailing their finances or re-entry. It turns a vague dream into a de-risked plan.",
+    investmentUSD: "$1,000 – $4,000",
+    investmentTier: "low",
+    avgMonthlyRevenueUSD: "$3,500 – $10,000",
+    avgMonthlyProfitUSD: "$2,800 – $7,500",
+    timeToProfit: "2–5 months",
+    whyGlobal: "Burnout and the desire for career breaks are global white-collar phenomena.",
+    skillsNeeded: ["Coaching", "Financial planning basics", "Content"]
+  },
+  {
+    title: "Vertical Job Board for Climate-Tech Non-Engineers",
+    trend: "Climate/sustainability",
+    description: "A niche job board and community connecting marketers, ops, and salespeople with climate-tech companies who mostly advertise engineering roles. It channels non-technical talent into the green economy.",
+    investmentUSD: "$2,500 – $8,000",
+    investmentTier: "medium",
+    avgMonthlyRevenueUSD: "$3,500 – $11,000",
+    avgMonthlyProfitUSD: "$2,500 – $8,000",
+    timeToProfit: "4–8 months",
+    whyGlobal: "Climate-tech hiring is a worldwide growth sector and remote roles cross borders.",
+    skillsNeeded: ["Community building", "Recruiting", "Content marketing"]
+  },
+  {
+    title: "AI-Curated Continuing-Education Tracker for Licensed Pros",
+    trend: "Niche B2B services",
+    description: "A tool that tracks continuing-education requirements for licensed professionals and recommends qualifying courses before deadlines. It removes the annual scramble to stay compliant.",
+    investmentUSD: "$4,000 – $12,000",
+    investmentTier: "medium",
+    avgMonthlyRevenueUSD: "$4,500 – $13,000",
+    avgMonthlyProfitUSD: "$3,000 – $9,000",
+    timeToProfit: "5–9 months",
+    whyGlobal: "Licensed professions with CE requirements exist across most countries.",
+    skillsNeeded: ["SaaS development", "Data aggregation", "Professional marketing"]
+  },
+  {
+    title: "Pet Behavior Video-Consult Marketplace",
+    trend: "Creator economy",
+    description: "A marketplace pairing pet owners with vetted behaviorists for async video consultations on specific issues like anxiety or reactivity. Owners get expert help without in-person visits.",
+    investmentUSD: "$3,500 – $10,000",
+    investmentTier: "medium",
+    avgMonthlyRevenueUSD: "$4,000 – $12,000",
+    avgMonthlyProfitUSD: "$2,800 – $8,000",
+    timeToProfit: "4–8 months",
+    whyGlobal: "Pet ownership and behavior struggles are global; consults happen fully online.",
+    skillsNeeded: ["Marketplace ops", "Expert vetting", "Pet-community marketing"]
+  }
+];
+
+/* ============================================================
+   STATE
+   ============================================================ */
+const TREND_META = {
+  "AI": "🤖",
+  "Creator economy": "🎨",
+  "Aging population": "👵",
+  "Climate/sustainability": "🌱",
+  "Remote work": "🌐",
+  "Health/longevity": "❤️",
+  "Niche B2B services": "🧩"
+};
+const TIER_LABEL = { low: "Low", medium: "Medium", high: "High" };
+
+const state = {
+  tier: null,                 // null = all
+  trend: null,                // null = all
+  saved: [],                  // in-memory bookmarks (array of idea objects)
+  currentIndex: null,
+  lastIndex: null
+};
+
+/* ============================================================
+   RENDER — filters
+   ============================================================ */
+const tierChipsEl = document.getElementById('tierChips');
+const trendChipsEl = document.getElementById('trendChips');
+const matchCountEl = document.getElementById('matchCount');
+
+function buildTierChips() {
+  const tiers = ['low', 'medium', 'high'];
+  tierChipsEl.innerHTML = '';
+  tiers.forEach(t => {
+    const b = document.createElement('button');
+    b.className = `chip tier-${t}` + (state.tier === t ? ' active' : '');
+    b.textContent = TIER_LABEL[t] + ' investment';
+    b.onclick = () => {
+      state.tier = state.tier === t ? null : t;
+      buildTierChips();
+      updateMatchCount();
+    };
+    tierChipsEl.appendChild(b);
+  });
+}
+
+function buildTrendChips() {
+  const trends = Object.keys(TREND_META);
+  trendChipsEl.innerHTML = '';
+  trends.forEach(tr => {
+    const b = document.createElement('button');
+    b.className = 'chip' + (state.trend === tr ? ' active' : '');
+    b.textContent = `${TREND_META[tr]} ${tr}`;
+    b.onclick = () => {
+      state.trend = state.trend === tr ? null : tr;
+      buildTrendChips();
+      updateMatchCount();
+    };
+    trendChipsEl.appendChild(b);
+  });
+}
+
+function getFiltered() {
+  return IDEAS.filter(i =>
+    (!state.tier || i.investmentTier === state.tier) &&
+    (!state.trend || i.trend === state.trend)
+  );
+}
+
+function updateMatchCount() {
+  const n = getFiltered().length;
+  const parts = [];
+  if (state.tier) parts.push(`${TIER_LABEL[state.tier]} tier`);
+  if (state.trend) parts.push(state.trend);
+  const label = parts.length ? parts.join(' · ') : 'all categories';
+  matchCountEl.innerHTML = `<b>${n}</b> idea${n === 1 ? '' : 's'} match ${label}`;
+}
+
+/* ============================================================
+   RENDER — idea card
+   ============================================================ */
+const stage = document.getElementById('stage');
+
+function ideaId(idea) {
+  return idea.title; // titles are unique in the dataset
+}
+
+function isSaved(idea) {
+  return state.saved.some(s => ideaId(s) === ideaId(idea));
+}
+
+function esc(str) {
+  return String(str).replace(/[&<>"']/g, c =>
+    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+
+function renderIdea(idea) {
+  const saved = isSaved(idea);
+  const skills = idea.skillsNeeded.map(s => `<span class="skill">${esc(s)}</span>`).join('');
+  stage.innerHTML = `
+    <article class="card enter">
+      <div class="card-top">
+        <span class="trend-tag">${TREND_META[idea.trend] || '✦'} ${esc(idea.trend)}</span>
+        <span class="tier-pill ${idea.investmentTier}">${TIER_LABEL[idea.investmentTier]} investment</span>
+      </div>
+      <h2>${esc(idea.title)}</h2>
+      <p class="desc">${esc(idea.description)}</p>
+
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-label">💵 Startup cost</div>
+          <div class="stat-value">${esc(idea.investmentUSD)}</div>
+        </div>
+        <div class="stat rev">
+          <div class="stat-label">📈 Monthly revenue</div>
+          <div class="stat-value">${esc(idea.avgMonthlyRevenueUSD)}</div>
+        </div>
+        <div class="stat profit">
+          <div class="stat-label">💰 Monthly profit</div>
+          <div class="stat-value">${esc(idea.avgMonthlyProfitUSD)}</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">⏱ Time to profit</div>
+          <div class="stat-value">${esc(idea.timeToProfit)}</div>
+        </div>
+      </div>
+
+      <div class="meta-row">
+        <div class="meta">
+          <span class="k">Why it works globally</span>
+          <b>${esc(idea.whyGlobal)}</b>
+        </div>
+      </div>
+
+      <div class="skills">${skills}</div>
+
+      <div class="card-actions">
+        <button class="save-btn ${saved ? 'saved' : ''}" id="saveBtn">
+          ${saved ? '★ Saved' : '☆ Save idea'}
+        </button>
+      </div>
+    </article>
+  `;
+  document.getElementById('saveBtn').onclick = () => toggleSave(idea);
+}
+
+/* ============================================================
+   GENERATE
+   ============================================================ */
+function pickRandom(pool) {
+  if (pool.length === 0) return null;
+  if (pool.length === 1) return pool[0];
+  // avoid immediate repeats
+  let choice, guard = 0;
+  do {
+    choice = pool[Math.floor(Math.random() * pool.length)];
+    guard++;
+  } while (ideaId(choice) === state.lastIndex && guard < 12);
+  return choice;
+}
+
+function generate(ignoreFilters) {
+  const pool = ignoreFilters ? IDEAS : getFiltered();
+  if (pool.length === 0) {
+    stage.innerHTML = `
+      <div class="empty-state">
+        <div class="big">🕳️</div>
+        <h3>No ideas match those filters</h3>
+        <p>Loosen a filter, or hit <b>Surprise me</b> to ignore filters entirely.</p>
+      </div>`;
+    return;
+  }
+  const idea = pickRandom(pool);
+  state.lastIndex = ideaId(idea);
+  renderIdea(idea);
+}
+
+/* ============================================================
+   SAVE / BOOKMARK
+   ============================================================ */
+const savedContainer = document.getElementById('savedContainer');
+const savedBadge = document.getElementById('savedBadge');
+
+function toggleSave(idea) {
+  if (isSaved(idea)) {
+    state.saved = state.saved.filter(s => ideaId(s) !== ideaId(idea));
+  } else {
+    state.saved.push(idea);
+  }
+  renderSaved();
+  // refresh the visible save button state
+  const btn = document.getElementById('saveBtn');
+  if (btn) {
+    const nowSaved = isSaved(idea);
+    btn.className = 'save-btn' + (nowSaved ? ' saved' : '');
+    btn.textContent = nowSaved ? '★ Saved' : '☆ Save idea';
+  }
+}
+
+function removeSaved(title) {
+  state.saved = state.saved.filter(s => ideaId(s) !== title);
+  renderSaved();
+  // refresh current card button if it matches
+  const btn = document.getElementById('saveBtn');
+  const h = stage.querySelector('h2');
+  if (btn && h && h.textContent === title) {
+    btn.className = 'save-btn';
+    btn.textContent = '☆ Save idea';
+  }
+}
+
+function renderSaved() {
+  savedBadge.textContent = state.saved.length;
+  if (state.saved.length === 0) {
+    savedContainer.innerHTML = `<div class="saved-empty">Nothing saved yet.<br />Hit <b>Save</b> on any idea you like.</div>`;
+    return;
+  }
+  savedContainer.innerHTML = `<div class="saved-list">` +
+    state.saved.map(s => `
+      <div class="saved-item">
+        <button class="remove" title="Remove" data-title="${esc(s.title)}">✕</button>
+        <h4>${esc(s.title)}</h4>
+        <div class="st">
+          <span>${TREND_META[s.trend] || '✦'} ${esc(s.trend)}</span>
+          <span class="rev">${esc(s.avgMonthlyRevenueUSD)}/mo</span>
+        </div>
+      </div>
+    `).join('') +
+    `</div>`;
+  savedContainer.querySelectorAll('.remove').forEach(btn => {
+    btn.onclick = () => removeSaved(btn.getAttribute('data-title'));
+  });
+}
+
+/* ============================================================
+   WIRE UP
+   ============================================================ */
+document.getElementById('generateBtn').onclick = () => generate(false);
+document.getElementById('surpriseBtn').onclick = () => generate(true);
+
+const sidePanel = document.getElementById('sidePanel');
+document.getElementById('savedToggle').onclick = () => sidePanel.classList.toggle('open');
+
+buildTierChips();
+buildTrendChips();
+updateMatchCount();
+renderSaved();
+</script>
+</body>
+</html>
