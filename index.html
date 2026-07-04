@@ -46,10 +46,7 @@
   .wrap { max-width: 1180px; margin: 0 auto; padding: 28px 20px 80px; }
 
   /* ---------- Header ---------- */
-  header {
-    display: flex; align-items: center; justify-content: space-between;
-    gap: 16px; flex-wrap: wrap; margin-bottom: 26px;
-  }
+  header { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 26px; }
   .brand { display: flex; align-items: center; gap: 12px; font-size: 1.55rem; font-weight: 700; letter-spacing: -.02em; }
   .spark {
     display: grid; place-items: center; width: 42px; height: 42px; border-radius: 13px;
@@ -62,9 +59,9 @@
   }
   .header-actions { display: flex; align-items: center; gap: 10px; }
   .pill-btn {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: var(--card); border: 1px solid var(--stroke); color: var(--text);
-    padding: 10px 16px; border-radius: 999px; font-weight: 600; cursor: pointer; font-size: .9rem;
+    display: inline-flex; align-items: center; gap: 8px; background: var(--card);
+    border: 1px solid var(--stroke); color: var(--text); padding: 10px 16px;
+    border-radius: 999px; font-weight: 600; cursor: pointer; font-size: .9rem;
   }
   .pill-btn:hover { border-color: var(--accent); }
   .pill-btn .badge { background: var(--accent); color: #fff; border-radius: 999px; padding: 1px 8px; font-size: .78rem; font-weight: 700; }
@@ -82,10 +79,7 @@
   }
   .filter-row { margin-bottom: 18px; }
   .filter-row:last-of-type { margin-bottom: 0; }
-  .filter-label {
-    font-size: .72rem; text-transform: uppercase; letter-spacing: .08em;
-    color: var(--faint); font-weight: 600; margin-bottom: 10px;
-  }
+  .filter-label { font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; color: var(--faint); font-weight: 600; margin-bottom: 10px; }
   .chips { display: flex; flex-wrap: wrap; gap: 9px; }
   .chip {
     border: 1px solid var(--stroke); background: var(--card-2); color: var(--muted);
@@ -103,17 +97,14 @@
 
   .actions { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin-top: 20px; }
   .btn {
-    border: none; cursor: pointer; font-weight: 600; font-size: 1rem;
-    padding: 14px 24px; border-radius: 14px;
-    transition: transform .15s ease, box-shadow .2s ease, filter .2s ease;
-    display: inline-flex; align-items: center; gap: 9px;
+    border: none; cursor: pointer; font-weight: 600; font-size: 1rem; padding: 14px 24px; border-radius: 14px;
+    transition: transform .15s ease, box-shadow .2s ease, filter .2s ease; display: inline-flex; align-items: center; gap: 9px;
   }
   .btn:disabled { opacity: .55; cursor: not-allowed; }
   .btn:active:not(:disabled) { transform: scale(.97); }
   .btn-primary {
     background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #fff;
-    box-shadow: 0 12px 30px -12px rgba(124,92,255,.9);
-    flex: 1; justify-content: center; min-width: 200px;
+    box-shadow: 0 12px 30px -12px rgba(124,92,255,.9); flex: 1; justify-content: center; min-width: 210px;
   }
   .btn-primary:hover:not(:disabled) { filter: brightness(1.08); transform: translateY(-2px); }
   .btn-ghost { background: var(--card-2); color: var(--text); border: 1px solid var(--stroke); }
@@ -121,8 +112,8 @@
   .match-count { font-size: .82rem; color: var(--faint); margin-left: auto; }
   .match-count b { color: var(--muted); }
   .offline-link {
-    background: none; border: none; color: var(--faint); font-size: .82rem;
-    cursor: pointer; text-decoration: underline; text-underline-offset: 3px; padding: 4px;
+    background: none; border: none; color: var(--faint); font-size: .82rem; cursor: pointer;
+    text-decoration: underline; text-underline-offset: 3px; padding: 4px;
   }
   .offline-link:hover { color: var(--muted); }
 
@@ -137,7 +128,6 @@
   .empty-state.error { border-color: rgba(255,107,139,.5); background: rgba(255,107,139,.06); }
   .empty-state.error h3 { color: #ffb3c2; }
 
-  /* loading */
   .loading { text-align: center; padding: 64px 24px; }
   .orbit { width: 64px; height: 64px; margin: 0 auto 22px; position: relative; }
   .orbit::before, .orbit::after {
@@ -148,98 +138,93 @@
   @keyframes spin { to { transform: rotate(360deg); } }
   .loading h3 { margin: 0 0 6px; font-size: 1.15rem; }
   .loading .status { color: var(--muted); font-size: .95rem; min-height: 1.4em; transition: opacity .3s; }
+  .loading .subhint { color: var(--faint); font-size: .82rem; margin-top: 8px; }
+
+  /* ---------- Batch header + grid ---------- */
+  .batch-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+  .batch-head .bh-title { display: flex; align-items: center; gap: 10px; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.12rem; }
+  .batch-head .bh-sub { display: block; font-family: 'Inter', sans-serif; font-size: .78rem; font-weight: 500; color: var(--faint); margin-top: 2px; }
+  .idea-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr)); gap: 16px; }
 
   /* ---------- Idea card ---------- */
   .card {
     background: linear-gradient(180deg, var(--card), var(--card-2));
-    border: 1px solid var(--stroke); border-radius: var(--radius); padding: 26px;
+    border: 1px solid var(--stroke); border-radius: var(--radius); padding: 22px;
     box-shadow: var(--shadow); position: relative; overflow: hidden;
   }
   .card::before {
     content: ""; position: absolute; inset: 0 0 auto 0; height: 4px;
     background: linear-gradient(90deg, var(--accent), var(--accent-2), var(--accent-3));
   }
-  @keyframes pop { 0% { opacity: 0; transform: translateY(18px) scale(.985); } 100% { opacity: 1; transform: translateY(0) scale(1); } }
-  .card.enter { animation: pop .42s cubic-bezier(.2,.8,.2,1); }
+  @keyframes pop { 0% { opacity: 0; transform: translateY(16px) scale(.985); } 100% { opacity: 1; transform: translateY(0) scale(1); } }
+  .card.enter { animation: pop .42s cubic-bezier(.2,.8,.2,1) both; }
 
-  .card-top { display: flex; justify-content: space-between; gap: 16px; align-items: flex-start; margin-bottom: 6px; flex-wrap: wrap; }
+  .card-top { display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; margin-bottom: 6px; flex-wrap: wrap; }
   .tag-group { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
   .trend-tag {
-    display: inline-flex; align-items: center; gap: 6px;
-    background: rgba(124,92,255,.14); border: 1px solid rgba(124,92,255,.35); color: #c3b6ff;
-    padding: 5px 12px; border-radius: 999px; font-size: .76rem; font-weight: 600;
+    display: inline-flex; align-items: center; gap: 6px; background: rgba(124,92,255,.14);
+    border: 1px solid rgba(124,92,255,.35); color: #c3b6ff; padding: 5px 12px;
+    border-radius: 999px; font-size: .74rem; font-weight: 600;
   }
-  .live-tag {
-    display: inline-flex; align-items: center; gap: 6px;
-    background: rgba(34,211,166,.12); border: 1px solid rgba(34,211,166,.4); color: var(--accent-2);
-    padding: 5px 12px; border-radius: 999px; font-size: .72rem; font-weight: 700; letter-spacing: .04em;
-  }
-  .live-tag.sample { background: rgba(118,124,158,.14); border-color: rgba(118,124,158,.4); color: var(--faint); }
-  .live-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent-2); animation: pulse 1.6s ease-in-out infinite; }
-  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .3; } }
   .tier-pill {
-    padding: 5px 12px; border-radius: 999px; font-size: .74rem; font-weight: 700;
+    padding: 5px 12px; border-radius: 999px; font-size: .72rem; font-weight: 700;
     text-transform: uppercase; letter-spacing: .05em; border: 1px solid transparent; white-space: nowrap;
   }
   .tier-pill.low    { color: var(--low);    background: rgba(34,211,166,.12); border-color: rgba(34,211,166,.4);}
   .tier-pill.medium { color: var(--medium); background: rgba(255,179,71,.12); border-color: rgba(255,179,71,.4);}
   .tier-pill.high   { color: var(--high);   background: rgba(255,107,139,.12); border-color: rgba(255,107,139,.4);}
 
-  .card h2 { font-size: 1.65rem; line-height: 1.15; letter-spacing: -.02em; margin: 12px 0 10px; text-wrap: balance; }
-  .card .desc { color: var(--muted); line-height: 1.6; font-size: .98rem; margin: 0 0 16px; }
+  .card h2 { font-size: 1.32rem; line-height: 1.18; letter-spacing: -.02em; margin: 12px 0 10px; text-wrap: balance; }
+  .card .desc { color: var(--muted); line-height: 1.55; font-size: .92rem; margin: 0 0 14px; }
 
   .signal {
-    display: flex; gap: 10px; align-items: flex-start;
-    background: rgba(34,211,166,.06); border: 1px solid rgba(34,211,166,.22);
-    border-radius: 12px; padding: 12px 14px; margin-bottom: 18px;
+    display: flex; gap: 9px; align-items: flex-start; background: rgba(34,211,166,.06);
+    border: 1px solid rgba(34,211,166,.22); border-radius: 12px; padding: 11px 13px; margin-bottom: 16px;
   }
-  .signal .ico { font-size: 1rem; line-height: 1.4; }
-  .signal .txt { font-size: .88rem; color: #bfe9dc; line-height: 1.5; }
+  .signal .ico { font-size: .95rem; line-height: 1.4; }
+  .signal .txt { font-size: .84rem; color: #bfe9dc; line-height: 1.5; }
   .signal .txt b { color: var(--accent-2); font-weight: 600; }
 
-  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 18px; }
-  .stat { background: rgba(255,255,255,.03); border: 1px solid var(--stroke); border-radius: 14px; padding: 13px 14px; }
+  .stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 16px; }
+  .stat { background: rgba(255,255,255,.03); border: 1px solid var(--stroke); border-radius: 13px; padding: 11px 13px; }
   .stat-label {
-    font-size: .68rem; text-transform: uppercase; letter-spacing: .06em; color: var(--faint);
-    font-weight: 600; margin-bottom: 5px; display: flex; align-items: center; gap: 5px;
+    font-size: .66rem; text-transform: uppercase; letter-spacing: .05em; color: var(--faint);
+    font-weight: 600; margin-bottom: 4px; display: flex; align-items: center; gap: 5px;
   }
-  .stat-value { font-size: 1.02rem; font-weight: 600; letter-spacing: -.01em; }
+  .stat-value { font-size: .98rem; font-weight: 600; letter-spacing: -.01em; }
   .stat.rev .stat-value { color: var(--accent-2); }
   .stat.profit .stat-value { color: #ffd479; }
 
-  .meta-row {
-    display: flex; flex-wrap: wrap; gap: 10px 22px; padding: 16px 0;
-    border-top: 1px solid var(--stroke); border-bottom: 1px solid var(--stroke); margin-bottom: 18px;
-  }
-  .meta { font-size: .9rem; color: var(--muted); }
+  .meta-row { padding: 14px 0; border-top: 1px solid var(--stroke); border-bottom: 1px solid var(--stroke); margin-bottom: 14px; }
+  .meta { font-size: .86rem; color: var(--muted); }
   .meta b { color: var(--text); font-weight: 600; }
-  .meta .k {
-    display: block; font-size: .68rem; text-transform: uppercase; letter-spacing: .06em;
-    color: var(--faint); font-weight: 600; margin-bottom: 3px;
-  }
+  .meta .k { display: block; font-size: .66rem; text-transform: uppercase; letter-spacing: .05em; color: var(--faint); font-weight: 600; margin-bottom: 3px; }
 
-  .skills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
-  .skill { font-size: .78rem; color: var(--muted); background: rgba(255,255,255,.04); border: 1px solid var(--stroke); padding: 5px 11px; border-radius: 8px; }
+  .skills { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 14px; }
+  .skill { font-size: .75rem; color: var(--muted); background: rgba(255,255,255,.04); border: 1px solid var(--stroke); padding: 4px 10px; border-radius: 8px; }
 
-  .sources { margin-bottom: 20px; }
-  .sources .src-label { font-size: .68rem; text-transform: uppercase; letter-spacing: .06em; color: var(--faint); font-weight: 600; margin-bottom: 8px; }
-  .sources .src-list { display: flex; flex-direction: column; gap: 6px; }
-  .sources a {
-    color: #a9b4ff; font-size: .84rem; text-decoration: none; display: inline-flex; gap: 7px; align-items: baseline;
-  }
+  .sources { margin-bottom: 16px; }
+  .sources .src-label { font-size: .66rem; text-transform: uppercase; letter-spacing: .05em; color: var(--faint); font-weight: 600; margin-bottom: 7px; }
+  .sources .src-list { display: flex; flex-direction: column; gap: 5px; }
+  .sources a { color: #a9b4ff; font-size: .8rem; text-decoration: none; display: inline-flex; gap: 6px; align-items: baseline; }
   .sources a:hover { text-decoration: underline; }
-  .sources a .dom { color: var(--faint); font-size: .76rem; }
+  .sources a .dom { color: var(--faint); font-size: .72rem; }
 
-  .card-actions { display: flex; gap: 12px; }
+  .card-actions { display: flex; gap: 10px; }
   .save-btn {
     background: var(--card-2); border: 1px solid var(--stroke); color: var(--text);
-    padding: 11px 20px; border-radius: 12px; font-weight: 600; cursor: pointer;
-    display: inline-flex; align-items: center; gap: 8px; transition: all .18s ease;
+    padding: 10px 18px; border-radius: 12px; font-weight: 600; cursor: pointer;
+    display: inline-flex; align-items: center; gap: 8px; transition: all .18s ease; font-size: .9rem;
   }
   .save-btn:hover { border-color: var(--accent-3); }
   .save-btn.saved { background: rgba(255,138,92,.15); border-color: var(--accent-3); color: #ffb99a; }
-  .regen-btn { background: none; border: 1px solid var(--stroke); color: var(--muted); padding: 11px 18px; border-radius: 12px; font-weight: 600; cursor: pointer; }
-  .regen-btn:hover { border-color: var(--accent); color: var(--text); }
+  .regen-btn { background: none; border: 1px solid var(--stroke); color: var(--muted); padding: 10px 16px; border-radius: 12px; font-weight: 600; cursor: pointer; font-size: .9rem; }
+  .regen-btn:hover:not(:disabled) { border-color: var(--accent); color: var(--text); }
+  .regen-btn:disabled { opacity: .5; cursor: not-allowed; }
+
+  .live-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent-2); box-shadow: 0 0 0 3px rgba(34,211,166,.18); display: inline-block; animation: pulse 1.6s ease-in-out infinite; }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .35; } }
+  .sample-tag { color: var(--faint); }
 
   /* ---------- Saved panel ---------- */
   .side {
@@ -261,22 +246,13 @@
   .disclaimer { text-align: center; color: var(--faint); font-size: .78rem; margin-top: 30px; line-height: 1.5; }
 
   /* ---------- Modal ---------- */
-  .modal-backdrop {
-    position: fixed; inset: 0; background: rgba(9,10,20,.72); backdrop-filter: blur(4px);
-    display: none; align-items: center; justify-content: center; padding: 20px; z-index: 50;
-  }
+  .modal-backdrop { position: fixed; inset: 0; background: rgba(9,10,20,.72); backdrop-filter: blur(4px); display: none; align-items: center; justify-content: center; padding: 20px; z-index: 50; }
   .modal-backdrop.open { display: flex; }
-  .modal {
-    background: linear-gradient(180deg, var(--bg-soft), var(--card)); border: 1px solid var(--stroke);
-    border-radius: 18px; padding: 26px; max-width: 460px; width: 100%; box-shadow: var(--shadow);
-  }
+  .modal { background: linear-gradient(180deg, var(--bg-soft), var(--card)); border: 1px solid var(--stroke); border-radius: 18px; padding: 26px; max-width: 460px; width: 100%; box-shadow: var(--shadow); }
   .modal h3 { margin: 0 0 6px; font-size: 1.2rem; }
   .modal p { color: var(--muted); font-size: .9rem; line-height: 1.55; margin: 0 0 18px; }
   .modal label { display: block; font-size: .74rem; text-transform: uppercase; letter-spacing: .06em; color: var(--faint); font-weight: 600; margin: 0 0 8px; }
-  .modal input, .modal select {
-    width: 100%; background: var(--card-2); border: 1px solid var(--stroke); color: var(--text);
-    border-radius: 12px; padding: 12px 14px; font-size: .95rem; font-family: inherit; margin-bottom: 16px;
-  }
+  .modal input, .modal select { width: 100%; background: var(--card-2); border: 1px solid var(--stroke); color: var(--text); border-radius: 12px; padding: 12px 14px; font-size: .95rem; font-family: inherit; margin-bottom: 16px; }
   .modal input:focus, .modal select:focus { outline: none; border-color: var(--accent); }
   .modal .hint { font-size: .78rem; color: var(--faint); margin: -8px 0 18px; line-height: 1.5; }
   .modal .hint a { color: #a9b4ff; }
@@ -290,12 +266,10 @@
     .side { position: relative; top: 0; display: none; }
     .side.open { display: block; }
     .saved-toggle { display: inline-flex; }
-    .stats { grid-template-columns: repeat(2, 1fr); }
   }
   @media (max-width: 520px) {
     .wrap { padding: 20px 14px 60px; }
-    .card { padding: 20px; }
-    .card h2 { font-size: 1.35rem; }
+    .card h2 { font-size: 1.25rem; }
     .btn-primary { min-width: unset; }
     .match-count { width: 100%; margin-left: 0; }
   }
@@ -329,20 +303,20 @@
           <div class="chips" id="trendChips"></div>
         </div>
         <div class="actions">
-          <button class="btn btn-primary" id="generateBtn">⚡ Generate live idea</button>
+          <button class="btn btn-primary" id="generateBtn">⚡ Generate 5 live ideas</button>
           <button class="btn btn-ghost" id="surpriseBtn">🎲 Surprise me</button>
           <span class="match-count" id="matchCount"></span>
         </div>
         <div style="margin-top:12px;">
-          <button class="offline-link" id="offlineBtn">or browse an offline sample (no key needed)</button>
+          <button class="offline-link" id="offlineBtn">or browse offline samples (no key needed)</button>
         </div>
       </section>
 
       <section class="stage" id="stage">
         <div class="empty-state">
           <div class="big">💡</div>
-          <h3>Fresh ideas, researched on demand</h3>
-          <p>Set your filters, then hit <b>Generate live idea</b> — TrendSpark researches current trends and news, then invents one non-obvious, globally viable business.</p>
+          <h3>Five fresh ideas, researched on demand</h3>
+          <p>Set your filters, then hit <b>Generate 5 live ideas</b> — TrendSpark researches current trends and news, then invents five non-obvious, globally viable businesses at once.</p>
         </div>
       </section>
 
@@ -393,17 +367,17 @@ const TREND_META = {
   "Climate/sustainability": "🌱",
   "Remote work": "🌐",
   "Health/longevity": "❤️",
-  "Niche B2B services": "🧩"
+  "Niche B2B services": "🧩",
+  "Products": "📦"
 };
 const TIER_LABEL = { low: "Low", medium: "Medium", high: "High" };
 const TRENDS = Object.keys(TREND_META);
+const BATCH_SIZE = 5;
 
-// A small offline seed set — shown only via "browse an offline sample" or on
-// API failure. The live generator is the primary experience.
+// Offline seed set — shown via "browse offline samples" or on API failure.
 const SAMPLE_IDEAS = [
   {
-    title: "AI Grant-Writing Copilot for Small NGOs",
-    trend: "AI",
+    title: "AI Grant-Writing Copilot for Small NGOs", trend: "AI",
     description: "A subscription tool that ingests a nonprofit's mission and past reports, then drafts tailored grant applications matched to open funding calls. It lets tiny NGOs compete with well-staffed ones.",
     investmentUSD: "$3,000 – $9,000", investmentTier: "medium",
     avgMonthlyRevenueUSD: "$4,000 – $12,000", avgMonthlyProfitUSD: "$2,500 – $8,000",
@@ -411,8 +385,7 @@ const SAMPLE_IDEAS = [
     skillsNeeded: ["Prompt engineering", "No-code SaaS", "B2B sales"]
   },
   {
-    title: "Digital Reminiscence Kits for Elder-Care Homes",
-    trend: "Aging population",
+    title: "Digital Reminiscence Kits for Elder-Care Homes", trend: "Aging population",
     description: "Themed multimedia packs (music, photos, prompts by decade and region) that care homes use for dementia reminiscence therapy on a tablet. Sold as a recurring content subscription per facility.",
     investmentUSD: "$2,500 – $8,000", investmentTier: "medium",
     avgMonthlyRevenueUSD: "$3,000 – $9,000", avgMonthlyProfitUSD: "$2,000 – $6,000",
@@ -420,8 +393,7 @@ const SAMPLE_IDEAS = [
     skillsNeeded: ["Content curation", "Licensing", "Care-sector sales"]
   },
   {
-    title: "Carbon-Footprint Labeling for Small E-commerce Brands",
-    trend: "Climate/sustainability",
+    title: "Carbon-Footprint Labeling for Small E-commerce Brands", trend: "Climate/sustainability",
     description: "A plug-in that estimates and displays a per-product carbon footprint badge on independent online stores. Eco-conscious shoppers convert better and brands get an edge without hiring consultants.",
     investmentUSD: "$4,000 – $11,000", investmentTier: "medium",
     avgMonthlyRevenueUSD: "$3,500 – $11,000", avgMonthlyProfitUSD: "$2,000 – $7,000",
@@ -429,8 +401,7 @@ const SAMPLE_IDEAS = [
     skillsNeeded: ["App integrations", "Lifecycle basics", "Content marketing"]
   },
   {
-    title: "Async Onboarding Video Library for Remote Teams",
-    trend: "Remote work",
+    title: "Async Onboarding Video Library for Remote Teams", trend: "Remote work",
     description: "A done-for-you service producing a modular library of short onboarding videos so distributed startups stop repeating the same live calls. Includes a searchable portal and quarterly refreshes.",
     investmentUSD: "$2,000 – $7,000", investmentTier: "low",
     avgMonthlyRevenueUSD: "$4,000 – $10,000", avgMonthlyProfitUSD: "$2,800 – $7,000",
@@ -438,8 +409,7 @@ const SAMPLE_IDEAS = [
     skillsNeeded: ["Video production", "Instructional design", "B2B outreach"]
   },
   {
-    title: "Niche Newsletter Ghostwriting for B2B Founders",
-    trend: "Niche B2B services",
+    title: "Niche Newsletter Ghostwriting for B2B Founders", trend: "Niche B2B services",
     description: "A productized service turning busy technical founders' voice notes into a polished weekly authority newsletter. Founders build audience and inbound leads without spending hours writing.",
     investmentUSD: "$500 – $3,000", investmentTier: "low",
     avgMonthlyRevenueUSD: "$4,000 – $11,000", avgMonthlyProfitUSD: "$3,200 – $8,500",
@@ -447,8 +417,7 @@ const SAMPLE_IDEAS = [
     skillsNeeded: ["Ghostwriting", "Interviewing", "Content strategy"]
   },
   {
-    title: "AI Symptom-Journaling Companion for Chronic Illness",
-    trend: "Health/longevity",
+    title: "AI Symptom-Journaling Companion for Chronic Illness", trend: "Health/longevity",
     description: "A gentle daily-check-in app that helps chronic-illness patients log symptoms and generates clear summaries to bring to doctor visits. It improves appointments without offering diagnoses.",
     investmentUSD: "$5,000 – $14,000", investmentTier: "high",
     avgMonthlyRevenueUSD: "$5,500 – $15,000", avgMonthlyProfitUSD: "$3,500 – $10,000",
@@ -456,13 +425,28 @@ const SAMPLE_IDEAS = [
     skillsNeeded: ["App development", "Health UX", "Community trust"]
   },
   {
-    title: "Cohort-Based Micro-Apprenticeships in Emerging Tools",
-    trend: "Creator economy",
+    title: "Cohort-Based Micro-Apprenticeships in Emerging Tools", trend: "Creator economy",
     description: "Short, project-based apprenticeship cohorts teaching fast-moving skills where learners ship a real deliverable. Employers scout graduates from a talent showcase.",
     investmentUSD: "$2,000 – $7,000", investmentTier: "low",
     avgMonthlyRevenueUSD: "$4,500 – $13,000", avgMonthlyProfitUSD: "$3,200 – $9,000",
     timeToProfit: "3–6 months", whyGlobal: "Demand for emerging-tool skills is global and cohorts run fully online.",
     skillsNeeded: ["Teaching", "Community", "Employer relations"]
+  },
+  {
+    title: "Modular Cable & Adapter Organizer for Digital Nomads", trend: "Products",
+    description: "A compact, magnetic organizer that keeps a remote worker's cables, dongles and SD cards tidy in a carry-on. Sold direct-to-consumer and shipped worldwide as a light, flat parcel.",
+    investmentUSD: "$4,000 – $12,000", investmentTier: "medium",
+    avgMonthlyRevenueUSD: "$5,000 – $16,000", avgMonthlyProfitUSD: "$3,000 – $9,000",
+    timeToProfit: "4–8 months", whyGlobal: "Small and light enough to ship affordably almost anywhere; remote workers are everywhere.",
+    skillsNeeded: ["Product design", "Overseas sourcing", "DTC marketing"]
+  },
+  {
+    title: "Seed-Paper Plant Markers for Balcony Gardeners", trend: "Products",
+    description: "Plantable, biodegradable plant labels printed with herb names that sprout wildflowers when the season ends. A low-cost, featherweight physical product sold in kits to the urban-gardening boom.",
+    investmentUSD: "$1,500 – $6,000", investmentTier: "low",
+    avgMonthlyRevenueUSD: "$3,000 – $9,000", avgMonthlyProfitUSD: "$1,800 – $5,500",
+    timeToProfit: "3–6 months", whyGlobal: "Featherweight product ships worldwide by letter-rate mail; balcony gardening is a global trend.",
+    skillsNeeded: ["Sourcing", "Packaging design", "Marketplace marketing"]
   }
 ];
 
@@ -473,11 +457,12 @@ const state = {
   tier: null,
   trend: null,
   saved: [],
-  lastTitle: null,
+  lastTitles: [],
   apiKey: "",
   model: "claude-opus-4-8",
   busy: false
 };
+let currentBatch = [];
 
 /* ============================================================
    FILTER CHIPS
@@ -506,17 +491,18 @@ function buildTrendChips() {
     trendChipsEl.appendChild(b);
   });
 }
-function updateMatchCount() {
+function activeFilterLabel() {
   const parts = [];
   if (state.tier) parts.push(`${TIER_LABEL[state.tier]} tier`);
   if (state.trend) parts.push(state.trend);
-  matchCountEl.innerHTML = parts.length
-    ? `Generating within <b>${parts.join(' · ')}</b>`
-    : `Generating across <b>all categories</b>`;
+  return parts.length ? parts.join(' · ') : 'all categories';
+}
+function updateMatchCount() {
+  matchCountEl.innerHTML = `Generating within <b>${esc(activeFilterLabel())}</b>`;
 }
 
 /* ============================================================
-   STAGE RENDERING
+   HELPERS + CARD MARKUP
    ============================================================ */
 const stage = document.getElementById('stage');
 
@@ -524,43 +510,25 @@ function esc(str) {
   return String(str == null ? '' : str).replace(/[&<>"']/g, c =>
     ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 }
-function ideaId(idea) { return idea.title; }
-function isSaved(idea) { return state.saved.some(s => ideaId(s) === ideaId(idea)); }
+function isSaved(idea) { return state.saved.some(s => s.title === idea.title); }
+function domainOf(url) { try { return new URL(url).hostname.replace(/^www\./, ''); } catch { return ''; } }
 
-function domainOf(url) {
-  try { return new URL(url).hostname.replace(/^www\./, ''); } catch { return ''; }
-}
-
-function renderIdea(idea, opts = {}) {
-  const live = !!opts.live;
+function ideaCardHTML(idea, live, index) {
   const saved = isSaved(idea);
   const skills = (idea.skillsNeeded || []).map(s => `<span class="skill">${esc(s)}</span>`).join('');
-
   const signalHtml = idea.trendSignal
-    ? `<div class="signal"><span class="ico">📡</span><span class="txt"><b>Current signal:</b> ${esc(idea.trendSignal)}</span></div>`
-    : '';
-
+    ? `<div class="signal"><span class="ico">📡</span><span class="txt"><b>Current signal:</b> ${esc(idea.trendSignal)}</span></div>` : '';
   const sources = (idea.sources || []).filter(s => s && s.url);
   const sourcesHtml = sources.length
-    ? `<div class="sources">
-         <div class="src-label">Grounded in</div>
-         <div class="src-list">${sources.slice(0, 4).map(s =>
-           `<a href="${esc(s.url)}" target="_blank" rel="noopener">↗ ${esc(s.title || domainOf(s.url) || s.url)} <span class="dom">${esc(domainOf(s.url))}</span></a>`
-         ).join('')}</div>
-       </div>`
-    : '';
-
+    ? `<div class="sources"><div class="src-label">Grounded in</div><div class="src-list">${sources.slice(0, 3).map(s =>
+        `<a href="${esc(s.url)}" target="_blank" rel="noopener">↗ ${esc(s.title || domainOf(s.url) || s.url)} <span class="dom">${esc(domainOf(s.url))}</span></a>`
+      ).join('')}</div></div>` : '';
   const tierClass = ['low', 'medium', 'high'].includes(idea.investmentTier) ? idea.investmentTier : 'medium';
 
-  stage.innerHTML = `
-    <article class="card enter">
+  return `
+    <article class="card enter" style="animation-delay:${index * 60}ms">
       <div class="card-top">
-        <div class="tag-group">
-          <span class="trend-tag">${TREND_META[idea.trend] || '✦'} ${esc(idea.trend)}</span>
-          ${live
-            ? `<span class="live-tag"><span class="live-dot"></span>Live · researched</span>`
-            : `<span class="live-tag sample">Offline sample</span>`}
-        </div>
+        <div class="tag-group"><span class="trend-tag">${TREND_META[idea.trend] || '✦'} ${esc(idea.trend)}</span></div>
         <span class="tier-pill ${tierClass}">${TIER_LABEL[tierClass]} investment</span>
       </div>
       <h2>${esc(idea.title)}</h2>
@@ -572,20 +540,38 @@ function renderIdea(idea, opts = {}) {
         <div class="stat profit"><div class="stat-label">💰 Monthly profit</div><div class="stat-value">${esc(idea.avgMonthlyProfitUSD)}</div></div>
         <div class="stat"><div class="stat-label">⏱ Time to profit</div><div class="stat-value">${esc(idea.timeToProfit)}</div></div>
       </div>
-      <div class="meta-row">
-        <div class="meta"><span class="k">Why it works globally</span><b>${esc(idea.whyGlobal)}</b></div>
-      </div>
+      <div class="meta-row"><div class="meta"><span class="k">Why it works globally</span><b>${esc(idea.whyGlobal)}</b></div></div>
       <div class="skills">${skills}</div>
       ${sourcesHtml}
       <div class="card-actions">
-        <button class="save-btn ${saved ? 'saved' : ''}" id="saveBtn">${saved ? '★ Saved' : '☆ Save idea'}</button>
-        <button class="regen-btn" id="regenBtn">↻ Another</button>
+        <button class="save-btn ${saved ? 'saved' : ''}" data-title="${esc(idea.title)}">${saved ? '★ Saved' : '☆ Save idea'}</button>
       </div>
     </article>`;
+}
 
-  document.getElementById('saveBtn').onclick = () => toggleSave(idea);
-  document.getElementById('regenBtn').onclick = () => (opts.regen ? opts.regen() : null);
-  state.lastTitle = ideaId(idea);
+function renderBatch(ideas, opts = {}) {
+  currentBatch = ideas;
+  const live = !!opts.live;
+  const titleBar = live
+    ? `<span class="live-dot"></span> ${ideas.length} live idea${ideas.length === 1 ? '' : 's'}`
+    : `<span class="sample-tag">${ideas.length} offline sample${ideas.length === 1 ? '' : 's'}</span>`;
+
+  stage.innerHTML = `
+    <div class="batch-head">
+      <div>
+        <div class="bh-title">${titleBar}</div>
+        <span class="bh-sub">${live ? 'Researched from current trends' : 'Curated examples'} · ${esc(activeFilterLabel())}</span>
+      </div>
+      <button class="regen-btn" id="genMore">↻ Generate 5 more</button>
+    </div>
+    <div class="idea-grid">${ideas.map((idea, i) => ideaCardHTML(idea, live, i)).join('')}</div>`;
+
+  document.getElementById('genMore').onclick = () => (opts.regen ? opts.regen() : null);
+  stage.querySelectorAll('.save-btn').forEach(btn => {
+    btn.onclick = () => toggleSaveByTitle(btn.getAttribute('data-title'));
+  });
+
+  state.lastTitles = ideas.map(i => i.title);
 }
 
 function renderLoading() {
@@ -594,14 +580,15 @@ function renderLoading() {
       <div class="orbit"></div>
       <h3>Researching current trends…</h3>
       <p class="status" id="statusLine">Warming up the idea engine</p>
+      <p class="subhint" id="subHint"></p>
     </div>`;
 }
 const LOADING_MESSAGES = [
   "Scanning recent developments and headlines…",
   "Searching for emerging, under-served niches…",
   "Cross-checking what's actually working right now…",
-  "Pressure-testing the financials for realism…",
-  "Shaping a non-obvious, globally viable idea…"
+  "Drafting five distinct, non-obvious ideas…",
+  "Pressure-testing the financials for realism…"
 ];
 function cycleStatus() {
   let i = 0;
@@ -618,38 +605,41 @@ function renderError(message, retry) {
   stage.innerHTML = `
     <div class="empty-state error">
       <div class="big">⚠️</div>
-      <h3>Couldn't generate an idea</h3>
+      <h3>Couldn't generate ideas</h3>
       <p>${esc(message)}</p>
       <div style="margin-top:16px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
         <button class="btn btn-ghost" id="errRetry">Try again</button>
-        <button class="btn btn-ghost" id="errSample">Browse offline sample</button>
+        <button class="btn btn-ghost" id="errSample">Browse offline samples</button>
       </div>
     </div>`;
   document.getElementById('errRetry').onclick = () => (retry ? retry() : null);
-  document.getElementById('errSample').onclick = () => showOfflineSample();
+  document.getElementById('errSample').onclick = () => showOfflineSamples();
 }
 
 /* ============================================================
-   CLAUDE API — live generation grounded in web search
+   CLAUDE API — live batch generation grounded in web search
    ============================================================ */
 const TODAY = "2026-07-04";
+const REQUEST_TIMEOUT_MS = 150000; // hard cap so the browser never hangs
 
 const SYSTEM_PROMPT =
 `You are TrendSpark's idea engine — a sharp business analyst who invents non-obvious, globally viable business ideas grounded in genuinely current trends and news.
 
-Today's date is ${TODAY}. Before proposing an idea, use the web_search tool to research what is happening RIGHT NOW (the last few months) in the relevant trend area. Anchor the idea in a specific, recent development, shift, product, regulation, or signal you find — not evergreen generalities.
+Today's date is ${TODAY}. First, use the web_search tool a few times to research what is happening RIGHT NOW (the last few months) in the relevant trend area(s). Anchor each idea in a specific, recent development, shift, product, regulation, or signal you find — not evergreen generalities. Do a small, efficient set of searches — do not over-search.
 
-Hard rules for the idea:
-- Title must be specific and concrete, never vague.
-- Genuinely uncommon: niche micro-SaaS, localized AI services, specialized consulting, or digital products for underserved niches. NEVER propose generic ideas like dropshipping, a food truck, a general social-media agency, print-on-demand t-shirts, or "an online course platform".
-- Must be doable from anywhere with only an internet connection — no country-specific licensing dependency.
-- Financial figures must be realistic and grounded — no fantasy like "$50k/month passive". Monthly profit must be lower than monthly revenue, and expressed as ranges.
-- The "trend" field must be EXACTLY one of: AI, Creator economy, Aging population, Climate/sustainability, Remote work, Health/longevity, Niche B2B services.
+Then propose EXACTLY ${BATCH_SIZE} ideas. Rules:
+- The ${BATCH_SIZE} ideas must be genuinely DISTINCT from each other — different sub-niches, customers, and angles, not variations of one theme.
+- Each title is specific and concrete, never vague.
+- Genuinely uncommon: niche micro-SaaS, localized AI services, specialized consulting, digital products for underserved niches, or distinctive physical products. NEVER propose generic ideas like dropshipping, a food truck, a general social-media agency, print-on-demand t-shirts, or "an online course platform".
+- Each must be doable from anywhere with only an internet connection — no country-specific licensing dependency.
+- Financial figures must be realistic and grounded — no fantasy like "$50k/month passive". Monthly profit must be lower than monthly revenue, expressed as ranges.
+- The "trend" field must be EXACTLY one of: AI, Creator economy, Aging population, Climate/sustainability, Remote work, Health/longevity, Niche B2B services, Products.
+- "Products" means small, LIGHTWEIGHT physical goods that can ship worldwide cheaply (light parcel / letter rate), are high-margin and design-led or niche — NOT generic dropshipping or print-on-demand basics.
 
-After researching, reply with one short sentence, then a single fenced \`\`\`json code block containing exactly one idea object, and nothing after it. Schema:
+After researching, reply with one short sentence, then a single fenced \`\`\`json code block containing a JSON ARRAY of exactly ${BATCH_SIZE} idea objects, and nothing after it. Each object:
 {
   "title": string,
-  "trend": one of the 7 categories above,
+  "trend": one of the 8 categories above,
   "description": string (2-3 sentences on what it actually does),
   "trendSignal": string (one line naming the SPECIFIC current development/news this rides on),
   "investmentUSD": string range e.g. "$2,000 – $8,000",
@@ -664,86 +654,77 @@ After researching, reply with one short sentence, then a single fenced \`\`\`jso
 
 function buildUserPrompt(ignoreFilters) {
   const constraints = [];
-  if (!ignoreFilters && state.tier) {
-    constraints.push(`The investmentTier MUST be exactly "${state.tier}".`);
-  }
-  if (!ignoreFilters && state.trend) {
-    constraints.push(`The trend MUST be exactly "${state.trend}".`);
-  }
+  if (!ignoreFilters && state.tier) constraints.push(`Every one of the ${BATCH_SIZE} ideas MUST have investmentTier exactly "${state.tier}".`);
+  if (!ignoreFilters && state.trend) constraints.push(`Every one of the ${BATCH_SIZE} ideas MUST have trend exactly "${state.trend}".`);
   let msg = ignoreFilters
-    ? `Surprise me: invent one fresh, non-obvious business idea from any trend category. Ignore any prior preferences and go somewhere unexpected.`
-    : `Invent one fresh, non-obvious business idea for me now.`;
+    ? `Surprise me: give me ${BATCH_SIZE} fresh, non-obvious business ideas from any trend categories. Ignore any prior preferences and go somewhere unexpected.`
+    : `Give me ${BATCH_SIZE} fresh, non-obvious business ideas now.`;
   if (constraints.length) msg += `\n\nConstraints:\n- ${constraints.join('\n- ')}`;
-  if (state.lastTitle) msg += `\n\nDo NOT repeat this idea, which I just saw: "${state.lastTitle}". Give me something clearly different.`;
+  if (state.lastTitles.length) msg += `\n\nDo NOT repeat these ideas I just saw: ${state.lastTitles.map(t => `"${t}"`).join(', ')}. Give clearly different ones.`;
   return msg;
 }
 
 async function callClaude(userPrompt, onStatus) {
   const body = {
     model: state.model,
-    max_tokens: 6000,
+    max_tokens: 8000,
     system: SYSTEM_PROMPT,
-    tools: [{ type: "web_search_20260209", name: "web_search", max_uses: 5 }],
+    // Basic web search — fast. (The _20260209 variant runs server-side code
+    // execution for dynamic filtering, which made generation take minutes.)
+    tools: [{ type: "web_search_20250305", name: "web_search", max_uses: 4 }],
     messages: [{ role: "user", content: userPrompt }]
   };
 
-  let data;
-  for (let round = 0; round < 4; round++) {
-    const resp = await fetch("https://api.anthropic.com/v1/messages", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        "x-api-key": state.apiKey,
-        "anthropic-version": "2023-06-01",
-        "anthropic-dangerous-direct-browser-access": "true"
-      },
-      body: JSON.stringify(body)
-    });
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
 
-    if (!resp.ok) {
-      let detail = `HTTP ${resp.status}`;
-      try { const e = await resp.json(); if (e.error && e.error.message) detail = e.error.message; } catch {}
-      if (resp.status === 401) detail = "Invalid API key. Open the API key panel and check it.";
-      throw new Error(detail);
+  try {
+    let data;
+    for (let round = 0; round < 3; round++) {
+      const resp = await fetch("https://api.anthropic.com/v1/messages", {
+        method: "POST",
+        signal: controller.signal,
+        headers: {
+          "content-type": "application/json",
+          "x-api-key": state.apiKey,
+          "anthropic-version": "2023-06-01",
+          "anthropic-dangerous-direct-browser-access": "true"
+        },
+        body: JSON.stringify(body)
+      });
+
+      if (!resp.ok) {
+        let detail = `HTTP ${resp.status}`;
+        try { const e = await resp.json(); if (e.error && e.error.message) detail = e.error.message; } catch {}
+        if (resp.status === 401) detail = "Invalid API key. Open the API key panel and check it.";
+        throw new Error(detail);
+      }
+
+      data = await resp.json();
+      if (data.stop_reason === "pause_turn") {
+        body.messages.push({ role: "assistant", content: data.content });
+        if (onStatus) onStatus();
+        continue;
+      }
+      break;
     }
 
-    data = await resp.json();
+    if (data.stop_reason === "refusal") throw new Error("The model declined this request. Try different filters or Surprise me.");
 
-    if (data.stop_reason === "pause_turn") {
-      // Server tool loop hit its limit — resend to continue.
-      body.messages.push({ role: "assistant", content: data.content });
-      if (onStatus) onStatus();
-      continue;
+    const text = (data.content || []).filter(b => b.type === "text").map(b => b.text).join("\n").trim();
+    return extractIdeas(text);
+  } catch (err) {
+    if (err.name === "AbortError") {
+      throw new Error("Timed out after ~2.5 minutes. Web research can be slow on Opus — try the Sonnet model (API key panel) or a narrower filter.");
     }
-    break;
+    throw err;
+  } finally {
+    clearTimeout(timer);
   }
-
-  if (data.stop_reason === "refusal") {
-    throw new Error("The model declined this request. Try different filters or Surprise me.");
-  }
-
-  const text = (data.content || [])
-    .filter(b => b.type === "text")
-    .map(b => b.text)
-    .join("\n")
-    .trim();
-
-  return extractIdea(text);
 }
 
-function extractIdea(text) {
-  if (!text) throw new Error("Empty response from the model.");
-  let raw = null;
-  const fenced = text.match(/```(?:json)?\s*([\s\S]*?)```/i);
-  if (fenced) raw = fenced[1];
-  if (!raw) { const braces = text.match(/\{[\s\S]*\}/); if (braces) raw = braces[0]; }
-  if (!raw) throw new Error("Could not read a structured idea from the response.");
-
-  let idea;
-  try { idea = JSON.parse(raw); }
-  catch { throw new Error("The model's idea wasn't valid JSON. Try again."); }
-
-  // Normalize + validate
+function normalizeIdea(idea) {
+  if (!idea || typeof idea !== 'object') return null;
   idea.title = idea.title || "Untitled idea";
   idea.trend = TRENDS.includes(idea.trend) ? idea.trend : (state.trend || "Niche B2B services");
   idea.investmentTier = String(idea.investmentTier || "").toLowerCase();
@@ -751,6 +732,27 @@ function extractIdea(text) {
   if (!Array.isArray(idea.skillsNeeded)) idea.skillsNeeded = idea.skillsNeeded ? [String(idea.skillsNeeded)] : [];
   if (!Array.isArray(idea.sources)) idea.sources = [];
   return idea;
+}
+
+function extractIdeas(text) {
+  if (!text) throw new Error("Empty response from the model.");
+  let raw = null;
+  const fenced = text.match(/```(?:json)?\s*([\s\S]*?)```/i);
+  if (fenced) raw = fenced[1];
+  if (!raw) { const arr = text.match(/\[[\s\S]*\]/); if (arr) raw = arr[0]; }
+  if (!raw) { const obj = text.match(/\{[\s\S]*\}/); if (obj) raw = obj[0]; }
+  if (!raw) throw new Error("Could not read structured ideas from the response.");
+
+  let parsed;
+  try { parsed = JSON.parse(raw); }
+  catch { throw new Error("The model's output wasn't valid JSON. Try again."); }
+
+  let list = Array.isArray(parsed) ? parsed
+    : Array.isArray(parsed.ideas) ? parsed.ideas
+    : [parsed];
+  list = list.map(normalizeIdea).filter(Boolean);
+  if (!list.length) throw new Error("No usable ideas came back. Try again.");
+  return list;
 }
 
 /* ============================================================
@@ -763,6 +765,8 @@ function setBusy(b) {
   state.busy = b;
   generateBtn.disabled = b;
   surpriseBtn.disabled = b;
+  const gm = document.getElementById('genMore');
+  if (gm) gm.disabled = b;
 }
 
 async function generate(ignoreFilters) {
@@ -773,33 +777,38 @@ async function generate(ignoreFilters) {
   setBusy(true);
   renderLoading();
   const timer = cycleStatus();
+  const hint = setTimeout(() => {
+    const s = document.getElementById('subHint');
+    if (s) s.textContent = "Deep web research can take a little while on Opus — hang tight, or pick Sonnet in the API key panel for speed.";
+  }, 40000);
 
   try {
-    const idea = await callClaude(buildUserPrompt(ignoreFilters));
-    clearInterval(timer);
-    renderIdea(idea, { live: true, regen: run });
+    const ideas = await callClaude(buildUserPrompt(ignoreFilters));
+    renderBatch(ideas, { live: true, regen: run });
   } catch (err) {
-    clearInterval(timer);
     renderError(err.message || String(err), run);
   } finally {
+    clearInterval(timer);
+    clearTimeout(hint);
     setBusy(false);
   }
 }
 
-/* Offline sample — respects filters, no API needed */
-function pickSample() {
+/* Offline samples — respects filters, no API needed */
+function pickSamples(n) {
   let pool = SAMPLE_IDEAS.filter(i =>
     (!state.tier || i.investmentTier === state.tier) &&
     (!state.trend || i.trend === state.trend));
-  if (pool.length === 0) pool = SAMPLE_IDEAS; // filters too narrow for the seed set
-  let choice, guard = 0;
-  do { choice = pool[Math.floor(Math.random() * pool.length)]; guard++; }
-  while (pool.length > 1 && ideaId(choice) === state.lastTitle && guard < 10);
-  return choice;
+  if (pool.length === 0) pool = SAMPLE_IDEAS.slice();
+  const shuffled = pool.slice();
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled.slice(0, Math.min(n, shuffled.length));
 }
-function showOfflineSample() {
-  const idea = pickSample();
-  renderIdea(idea, { live: false, regen: showOfflineSample });
+function showOfflineSamples() {
+  renderBatch(pickSamples(BATCH_SIZE), { live: false, regen: showOfflineSamples });
 }
 
 /* ============================================================
@@ -808,23 +817,25 @@ function showOfflineSample() {
 const savedContainer = document.getElementById('savedContainer');
 const savedBadge = document.getElementById('savedBadge');
 
-function toggleSave(idea) {
-  if (isSaved(idea)) state.saved = state.saved.filter(s => ideaId(s) !== ideaId(idea));
+function syncSaveButtons() {
+  stage.querySelectorAll('.save-btn').forEach(btn => {
+    const on = state.saved.some(s => s.title === btn.getAttribute('data-title'));
+    btn.classList.toggle('saved', on);
+    btn.textContent = on ? '★ Saved' : '☆ Save idea';
+  });
+}
+function toggleSaveByTitle(title) {
+  const idea = currentBatch.find(i => i.title === title);
+  if (!idea) return;
+  if (state.saved.some(s => s.title === title)) state.saved = state.saved.filter(s => s.title !== title);
   else state.saved.push(idea);
+  syncSaveButtons();
   renderSaved();
-  const btn = document.getElementById('saveBtn');
-  if (btn) {
-    const now = isSaved(idea);
-    btn.className = 'save-btn' + (now ? ' saved' : '');
-    btn.textContent = now ? '★ Saved' : '☆ Save idea';
-  }
 }
 function removeSaved(title) {
-  state.saved = state.saved.filter(s => ideaId(s) !== title);
+  state.saved = state.saved.filter(s => s.title !== title);
   renderSaved();
-  const btn = document.getElementById('saveBtn');
-  const h = stage.querySelector('h2');
-  if (btn && h && h.textContent === title) { btn.className = 'save-btn'; btn.textContent = '☆ Save idea'; }
+  syncSaveButtons();
 }
 function renderSaved() {
   savedBadge.textContent = state.saved.length;
@@ -876,7 +887,7 @@ keyInput.addEventListener('keydown', e => { if (e.key === 'Enter') document.getE
    ============================================================ */
 generateBtn.onclick = () => generate(false);
 surpriseBtn.onclick = () => generate(true);
-document.getElementById('offlineBtn').onclick = () => showOfflineSample();
+document.getElementById('offlineBtn').onclick = () => showOfflineSamples();
 
 const sidePanel = document.getElementById('sidePanel');
 document.getElementById('savedToggle').onclick = () => sidePanel.classList.toggle('open');
