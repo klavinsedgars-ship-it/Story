@@ -6,261 +6,215 @@
 <title>TrendSpark — Live Business Ideas Generator</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
 <style>
   :root {
-    --bg: #0f1020;
-    --bg-soft: #181a30;
-    --card: #1e2138;
-    --card-2: #23273f;
-    --stroke: #2f3450;
-    --text: #eef0f7;
-    --muted: #a2a7c4;
-    --faint: #767c9e;
-    --accent: #7c5cff;
-    --accent-2: #22d3a6;
-    --accent-3: #ff8a5c;
-    --low: #22d3a6;
-    --medium: #ffb347;
-    --high: #ff6b8b;
-    --shadow: 0 20px 50px -20px rgba(0,0,0,.65);
-    --radius: 20px;
+    --bg: #ffffff;
+    --panel: #fafafa;
+    --panel-2: #f4f4f5;
+    --line: #e7e7e9;
+    --line-strong: #d6d6da;
+    --text: #18181b;
+    --muted: #5c5c66;
+    --faint: #9a9aa4;
+    --radius: 14px;
+    --shadow: 0 1px 2px rgba(24,24,27,.04), 0 8px 24px -18px rgba(24,24,27,.25);
   }
 
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
 
   body {
-    font-family: 'Inter', system-ui, sans-serif;
-    background:
-      radial-gradient(1100px 600px at 12% -8%, rgba(124,92,255,.20), transparent 60%),
-      radial-gradient(900px 500px at 100% 0%, rgba(34,211,166,.14), transparent 55%),
-      var(--bg);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
     color: var(--text);
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
   }
+  .brand-mark, .wordmark, .btn, .tier, .stat-value, .label { font-family: 'Space Grotesk', 'Inter', sans-serif; }
 
-  h1, h2, h3, .brand, .btn, .stat-value, .tier-pill { font-family: 'Space Grotesk', 'Inter', sans-serif; }
-
-  .wrap { max-width: 1180px; margin: 0 auto; padding: 28px 20px 80px; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 26px 22px 90px; }
 
   /* ---------- Header ---------- */
-  header { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 26px; }
-  .brand { display: flex; align-items: center; gap: 12px; font-size: 1.55rem; font-weight: 700; letter-spacing: -.02em; }
-  .spark {
-    display: grid; place-items: center; width: 42px; height: 42px; border-radius: 13px;
-    background: linear-gradient(135deg, var(--accent), var(--accent-2));
-    box-shadow: 0 8px 24px -8px rgba(124,92,255,.8); font-size: 1.25rem;
+  header {
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    flex-wrap: wrap; padding-bottom: 22px; margin-bottom: 26px; border-bottom: 1px solid var(--line);
   }
-  .brand small {
-    display: block; font-family: 'Inter', sans-serif; font-size: .72rem; font-weight: 500;
-    letter-spacing: .04em; color: var(--muted); text-transform: uppercase;
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .brand-mark {
+    display: grid; place-items: center; width: 38px; height: 38px; border-radius: 10px;
+    background: var(--text); color: #fff; font-size: 1.1rem;
   }
+  .wordmark { font-size: 1.4rem; font-weight: 700; letter-spacing: -.02em; line-height: 1; }
+  .wordmark small { display: block; font-family: 'Inter', sans-serif; font-size: .72rem; font-weight: 500; letter-spacing: .05em; color: var(--faint); text-transform: uppercase; margin-top: 4px; }
   .header-actions { display: flex; align-items: center; gap: 10px; }
   .pill-btn {
-    display: inline-flex; align-items: center; gap: 8px; background: var(--card);
-    border: 1px solid var(--stroke); color: var(--text); padding: 10px 16px;
-    border-radius: 999px; font-weight: 600; cursor: pointer; font-size: .9rem;
+    display: inline-flex; align-items: center; gap: 8px; background: #fff;
+    border: 1px solid var(--line-strong); color: var(--text); padding: 9px 15px;
+    border-radius: 999px; font-weight: 600; cursor: pointer; font-size: .88rem;
   }
-  .pill-btn:hover { border-color: var(--accent); }
-  .pill-btn .badge { background: var(--accent); color: #fff; border-radius: 999px; padding: 1px 8px; font-size: .78rem; font-weight: 700; }
-  .key-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--high); box-shadow: 0 0 0 3px rgba(255,107,139,.18); }
-  .key-dot.on { background: var(--accent-2); box-shadow: 0 0 0 3px rgba(34,211,166,.18); }
+  .pill-btn:hover { border-color: var(--text); }
+  .pill-btn .badge { background: var(--text); color: #fff; border-radius: 999px; padding: 1px 8px; font-size: .76rem; font-weight: 700; }
+  .key-dot { width: 8px; height: 8px; border-radius: 50%; border: 1.5px solid var(--faint); }
+  .key-dot.on { background: var(--text); border-color: var(--text); }
   .saved-toggle { display: none; }
 
-  .layout { display: grid; grid-template-columns: 1fr 320px; gap: 26px; align-items: start; }
+  .layout { display: grid; grid-template-columns: 1fr 300px; gap: 28px; align-items: start; }
 
   /* ---------- Controls ---------- */
-  .controls {
-    background: linear-gradient(180deg, var(--bg-soft), var(--card));
-    border: 1px solid var(--stroke); border-radius: var(--radius);
-    padding: 22px; box-shadow: var(--shadow); margin-bottom: 22px;
-  }
-  .filter-row { margin-bottom: 18px; }
+  .controls { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; margin-bottom: 26px; }
+  .filter-row { margin-bottom: 16px; }
   .filter-row:last-of-type { margin-bottom: 0; }
-  .filter-label { font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; color: var(--faint); font-weight: 600; margin-bottom: 10px; }
-  .chips { display: flex; flex-wrap: wrap; gap: 9px; }
+  .label { font-size: .68rem; text-transform: uppercase; letter-spacing: .09em; color: var(--faint); font-weight: 600; margin-bottom: 9px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
   .chip {
-    border: 1px solid var(--stroke); background: var(--card-2); color: var(--muted);
-    padding: 8px 14px; border-radius: 999px; font-size: .84rem; font-weight: 500;
-    cursor: pointer; transition: all .18s ease; white-space: nowrap;
+    border: 1px solid var(--line-strong); background: #fff; color: var(--muted);
+    padding: 7px 13px; border-radius: 999px; font-size: .84rem; font-weight: 500;
+    cursor: pointer; transition: all .15s ease; white-space: nowrap;
   }
-  .chip:hover { border-color: var(--accent); color: var(--text); transform: translateY(-1px); }
-  .chip.active {
-    background: linear-gradient(135deg, var(--accent), #9a7dff); border-color: transparent; color: #fff;
-    box-shadow: 0 6px 18px -8px rgba(124,92,255,.9);
-  }
-  .chip.tier-low.active   { background: linear-gradient(135deg,#12b48c,#22d3a6); box-shadow:0 6px 18px -8px rgba(34,211,166,.8);}
-  .chip.tier-medium.active{ background: linear-gradient(135deg,#e79521,#ffb347); box-shadow:0 6px 18px -8px rgba(255,179,71,.8);}
-  .chip.tier-high.active  { background: linear-gradient(135deg,#e04d6d,#ff6b8b); box-shadow:0 6px 18px -8px rgba(255,107,139,.8);}
+  .chip:hover { border-color: var(--text); color: var(--text); }
+  .chip.active { background: var(--text); color: #fff; border-color: var(--text); }
 
-  .actions { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin-top: 20px; }
+  .actions { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-top: 18px; }
   .btn {
-    border: none; cursor: pointer; font-weight: 600; font-size: 1rem; padding: 14px 24px; border-radius: 14px;
-    transition: transform .15s ease, box-shadow .2s ease, filter .2s ease; display: inline-flex; align-items: center; gap: 9px;
+    border: none; cursor: pointer; font-weight: 600; font-size: .95rem; padding: 12px 20px; border-radius: 11px;
+    transition: all .15s ease; display: inline-flex; align-items: center; gap: 8px;
   }
-  .btn:disabled { opacity: .55; cursor: not-allowed; }
-  .btn:active:not(:disabled) { transform: scale(.97); }
-  .btn-primary {
-    background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #fff;
-    box-shadow: 0 12px 30px -12px rgba(124,92,255,.9); flex: 1; justify-content: center; min-width: 210px;
-  }
-  .btn-primary:hover:not(:disabled) { filter: brightness(1.08); transform: translateY(-2px); }
-  .btn-ghost { background: var(--card-2); color: var(--text); border: 1px solid var(--stroke); }
-  .btn-ghost:hover:not(:disabled) { border-color: var(--accent-3); color: #fff; }
+  .btn:disabled { opacity: .5; cursor: not-allowed; }
+  .btn:active:not(:disabled) { transform: scale(.98); }
+  .btn-primary { background: var(--text); color: #fff; flex: 1; justify-content: center; min-width: 200px; }
+  .btn-primary:hover:not(:disabled) { background: #000; }
+  .btn-ghost { background: #fff; color: var(--text); border: 1px solid var(--line-strong); }
+  .btn-ghost:hover:not(:disabled) { border-color: var(--text); }
   .match-count { font-size: .82rem; color: var(--faint); margin-left: auto; }
-  .match-count b { color: var(--muted); }
-  .offline-link {
-    background: none; border: none; color: var(--faint); font-size: .82rem; cursor: pointer;
-    text-decoration: underline; text-underline-offset: 3px; padding: 4px;
-  }
+  .match-count b { color: var(--muted); font-weight: 600; }
+  .offline-link { background: none; border: none; color: var(--faint); font-size: .82rem; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; padding: 4px; }
   .offline-link:hover { color: var(--muted); }
 
   /* ---------- Stage / states ---------- */
-  .stage { min-height: 360px; }
-  .empty-state {
-    text-align: center; padding: 60px 24px; color: var(--muted);
-    border: 1.5px dashed var(--stroke); border-radius: var(--radius); background: rgba(255,255,255,.015);
-  }
-  .empty-state .big { font-size: 2.4rem; margin-bottom: 8px; }
-  .empty-state h3 { margin: 0 0 6px; color: var(--text); }
-  .empty-state.error { border-color: rgba(255,107,139,.5); background: rgba(255,107,139,.06); }
-  .empty-state.error h3 { color: #ffb3c2; }
+  .stage { min-height: 300px; }
+  .empty-state { text-align: center; padding: 64px 24px; color: var(--muted); border: 1px dashed var(--line-strong); border-radius: var(--radius); background: var(--panel); }
+  .empty-state .big { font-size: 2rem; margin-bottom: 10px; filter: grayscale(1); }
+  .empty-state h3 { margin: 0 0 6px; color: var(--text); font-weight: 600; }
+  .empty-state.error { border-color: var(--line-strong); background: var(--panel-2); }
 
-  .loading { text-align: center; padding: 64px 24px; }
-  .orbit { width: 64px; height: 64px; margin: 0 auto 22px; position: relative; }
-  .orbit::before, .orbit::after {
-    content: ""; position: absolute; inset: 0; border-radius: 50%;
-    border: 3px solid transparent; border-top-color: var(--accent); animation: spin 1s linear infinite;
-  }
-  .orbit::after { inset: 10px; border-top-color: var(--accent-2); animation-duration: 1.5s; animation-direction: reverse; }
+  .loading { text-align: center; padding: 60px 24px; }
+  .spinner { width: 34px; height: 34px; margin: 0 auto 20px; border: 2px solid var(--line); border-top-color: var(--text); border-radius: 50%; animation: spin .9s linear infinite; }
   @keyframes spin { to { transform: rotate(360deg); } }
-  .loading h3 { margin: 0 0 6px; font-size: 1.15rem; }
-  .loading .status { color: var(--muted); font-size: .95rem; min-height: 1.4em; transition: opacity .3s; }
-  .loading .subhint { color: var(--faint); font-size: .82rem; margin-top: 8px; }
+  .loading h3 { margin: 0 0 6px; font-size: 1.05rem; font-weight: 600; }
+  .loading .status { color: var(--muted); font-size: .92rem; min-height: 1.4em; transition: opacity .3s; }
+  .loading .subhint { color: var(--faint); font-size: .8rem; margin-top: 8px; }
 
-  /* ---------- Batch header + grid ---------- */
-  .batch-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
-  .batch-head .bh-title { display: flex; align-items: center; gap: 10px; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.12rem; }
-  .batch-head .bh-sub { display: block; font-family: 'Inter', sans-serif; font-size: .78rem; font-weight: 500; color: var(--faint); margin-top: 2px; }
-  .idea-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr)); gap: 16px; }
-
-  /* ---------- Idea card ---------- */
-  .card {
-    background: linear-gradient(180deg, var(--card), var(--card-2));
-    border: 1px solid var(--stroke); border-radius: var(--radius); padding: 22px;
-    box-shadow: var(--shadow); position: relative; overflow: hidden;
-  }
-  .card::before {
-    content: ""; position: absolute; inset: 0 0 auto 0; height: 4px;
-    background: linear-gradient(90deg, var(--accent), var(--accent-2), var(--accent-3));
-  }
-  @keyframes pop { 0% { opacity: 0; transform: translateY(16px) scale(.985); } 100% { opacity: 1; transform: translateY(0) scale(1); } }
-  .card.enter { animation: pop .42s cubic-bezier(.2,.8,.2,1) both; }
-
-  .card-top { display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; margin-bottom: 6px; flex-wrap: wrap; }
-  .tag-group { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
-  .trend-tag {
-    display: inline-flex; align-items: center; gap: 6px; background: rgba(124,92,255,.14);
-    border: 1px solid rgba(124,92,255,.35); color: #c3b6ff; padding: 5px 12px;
-    border-radius: 999px; font-size: .74rem; font-weight: 600;
-  }
-  .tier-pill {
-    padding: 5px 12px; border-radius: 999px; font-size: .72rem; font-weight: 700;
-    text-transform: uppercase; letter-spacing: .05em; border: 1px solid transparent; white-space: nowrap;
-  }
-  .tier-pill.low    { color: var(--low);    background: rgba(34,211,166,.12); border-color: rgba(34,211,166,.4);}
-  .tier-pill.medium { color: var(--medium); background: rgba(255,179,71,.12); border-color: rgba(255,179,71,.4);}
-  .tier-pill.high   { color: var(--high);   background: rgba(255,107,139,.12); border-color: rgba(255,107,139,.4);}
-
-  .card h2 { font-size: 1.32rem; line-height: 1.18; letter-spacing: -.02em; margin: 12px 0 10px; text-wrap: balance; }
-  .card .desc { color: var(--muted); line-height: 1.55; font-size: .92rem; margin: 0 0 14px; }
-
-  .signal {
-    display: flex; gap: 9px; align-items: flex-start; background: rgba(34,211,166,.06);
-    border: 1px solid rgba(34,211,166,.22); border-radius: 12px; padding: 11px 13px; margin-bottom: 16px;
-  }
-  .signal .ico { font-size: .95rem; line-height: 1.4; }
-  .signal .txt { font-size: .84rem; color: #bfe9dc; line-height: 1.5; }
-  .signal .txt b { color: var(--accent-2); font-weight: 600; }
-
-  .stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 16px; }
-  .stat { background: rgba(255,255,255,.03); border: 1px solid var(--stroke); border-radius: 13px; padding: 11px 13px; }
-  .stat-label {
-    font-size: .66rem; text-transform: uppercase; letter-spacing: .05em; color: var(--faint);
-    font-weight: 600; margin-bottom: 4px; display: flex; align-items: center; gap: 5px;
-  }
-  .stat-value { font-size: .98rem; font-weight: 600; letter-spacing: -.01em; }
-  .stat.rev .stat-value { color: var(--accent-2); }
-  .stat.profit .stat-value { color: #ffd479; }
-
-  .meta-row { padding: 14px 0; border-top: 1px solid var(--stroke); border-bottom: 1px solid var(--stroke); margin-bottom: 14px; }
-  .meta { font-size: .86rem; color: var(--muted); }
-  .meta b { color: var(--text); font-weight: 600; }
-  .meta .k { display: block; font-size: .66rem; text-transform: uppercase; letter-spacing: .05em; color: var(--faint); font-weight: 600; margin-bottom: 3px; }
-
-  .skills { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 14px; }
-  .skill { font-size: .75rem; color: var(--muted); background: rgba(255,255,255,.04); border: 1px solid var(--stroke); padding: 4px 10px; border-radius: 8px; }
-
-  .sources { margin-bottom: 16px; }
-  .sources .src-label { font-size: .66rem; text-transform: uppercase; letter-spacing: .05em; color: var(--faint); font-weight: 600; margin-bottom: 7px; }
-  .sources .src-list { display: flex; flex-direction: column; gap: 5px; }
-  .sources a { color: #a9b4ff; font-size: .8rem; text-decoration: none; display: inline-flex; gap: 6px; align-items: baseline; }
-  .sources a:hover { text-decoration: underline; }
-  .sources a .dom { color: var(--faint); font-size: .72rem; }
-
-  .card-actions { display: flex; gap: 10px; }
-  .save-btn {
-    background: var(--card-2); border: 1px solid var(--stroke); color: var(--text);
-    padding: 10px 18px; border-radius: 12px; font-weight: 600; cursor: pointer;
-    display: inline-flex; align-items: center; gap: 8px; transition: all .18s ease; font-size: .9rem;
-  }
-  .save-btn:hover { border-color: var(--accent-3); }
-  .save-btn.saved { background: rgba(255,138,92,.15); border-color: var(--accent-3); color: #ffb99a; }
-  .regen-btn { background: none; border: 1px solid var(--stroke); color: var(--muted); padding: 10px 16px; border-radius: 12px; font-weight: 600; cursor: pointer; font-size: .9rem; }
-  .regen-btn:hover:not(:disabled) { border-color: var(--accent); color: var(--text); }
+  /* ---------- Batch header ---------- */
+  .batch-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 6px; }
+  .batch-head .bh-title { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.1rem; }
+  .batch-head .bh-sub { font-size: .8rem; color: var(--faint); }
+  .regen-btn { background: #fff; border: 1px solid var(--line-strong); color: var(--text); padding: 9px 15px; border-radius: 10px; font-weight: 600; cursor: pointer; font-size: .86rem; }
+  .regen-btn:hover:not(:disabled) { border-color: var(--text); }
   .regen-btn:disabled { opacity: .5; cursor: not-allowed; }
 
-  .live-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent-2); box-shadow: 0 0 0 3px rgba(34,211,166,.18); display: inline-block; animation: pulse 1.6s ease-in-out infinite; }
-  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .35; } }
-  .sample-tag { color: var(--faint); }
+  /* ---------- Idea list ---------- */
+  .idea-list { list-style: none; margin: 12px 0 0; padding: 0; border-top: 1px solid var(--line); }
+  .idea { padding: 26px 0; border-bottom: 1px solid var(--line); }
+  @keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  .idea.enter { animation: fade .35s ease both; }
+
+  .idea-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+  .idea-titles { min-width: 0; }
+  .trend-label { font-size: .68rem; text-transform: uppercase; letter-spacing: .08em; color: var(--faint); font-weight: 600; }
+  .idea h2 { font-size: 1.28rem; line-height: 1.25; letter-spacing: -.015em; margin: 6px 0 0; font-weight: 600; text-wrap: balance; }
+  .idea-head-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+  .tier {
+    font-size: .66rem; text-transform: uppercase; letter-spacing: .07em; font-weight: 700;
+    padding: 4px 9px; border-radius: 6px; border: 1px solid var(--line-strong); color: var(--muted); white-space: nowrap;
+  }
+  .tier-low { background: #fff; color: var(--faint); }
+  .tier-medium { background: var(--panel-2); color: var(--muted); }
+  .tier-high { background: var(--text); color: #fff; border-color: var(--text); }
+
+  .desc { color: var(--muted); font-size: .96rem; line-height: 1.6; margin: 12px 0 0; max-width: 68ch; }
+
+  .signal { display: flex; gap: 8px; align-items: flex-start; margin-top: 12px; padding: 10px 12px; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; }
+  .signal .ico { filter: grayscale(1); font-size: .9rem; }
+  .signal .txt { font-size: .85rem; color: var(--muted); line-height: 1.5; }
+  .signal .txt b { color: var(--text); font-weight: 600; }
+
+  /* thumbnails */
+  .thumbs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 16px; }
+  .thumb {
+    position: relative; aspect-ratio: 4 / 3; border-radius: 10px; overflow: hidden;
+    border: 1px solid var(--line); background: var(--panel-2); padding: 0; cursor: zoom-in; display: block;
+  }
+  .thumb::before {
+    content: "generating…"; position: absolute; inset: 0; display: grid; place-items: center;
+    font-size: .72rem; color: var(--faint); letter-spacing: .02em;
+  }
+  .thumb img { position: relative; width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0; transition: opacity .5s ease; }
+  .thumb img.loaded { opacity: 1; }
+  .thumb.failed { cursor: default; }
+  .thumb.failed::before { content: "preview unavailable"; }
+  .thumb.failed img { display: none; }
+  .thumbs-note { font-size: .72rem; color: var(--faint); margin-top: 7px; }
+
+  .statline { display: flex; flex-wrap: wrap; gap: 10px 28px; margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--line); }
+  .stat .stat-k { font-size: .64rem; text-transform: uppercase; letter-spacing: .06em; color: var(--faint); font-weight: 600; margin-bottom: 3px; }
+  .stat .stat-value { font-size: .96rem; font-weight: 600; font-variant-numeric: tabular-nums; letter-spacing: -.01em; }
+
+  .metaline { margin-top: 14px; font-size: .88rem; color: var(--muted); }
+  .metaline b { color: var(--text); font-weight: 600; }
+  .metaline .k { font-size: .64rem; text-transform: uppercase; letter-spacing: .06em; color: var(--faint); font-weight: 600; margin-right: 6px; }
+
+  .skills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+  .skill { font-size: .74rem; color: var(--muted); border: 1px solid var(--line); padding: 3px 9px; border-radius: 6px; }
+
+  .sources { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 6px 14px; }
+  .sources .s-k { font-size: .64rem; text-transform: uppercase; letter-spacing: .06em; color: var(--faint); font-weight: 600; }
+  .sources a { color: var(--muted); font-size: .8rem; text-decoration: none; border-bottom: 1px solid var(--line-strong); }
+  .sources a:hover { color: var(--text); border-color: var(--text); }
+
+  .save-btn {
+    background: #fff; border: 1px solid var(--line-strong); color: var(--text);
+    padding: 7px 14px; border-radius: 9px; font-weight: 600; cursor: pointer; font-size: .82rem; white-space: nowrap;
+  }
+  .save-btn:hover { border-color: var(--text); }
+  .save-btn.saved { background: var(--text); color: #fff; border-color: var(--text); }
 
   /* ---------- Saved panel ---------- */
-  .side {
-    background: linear-gradient(180deg, var(--bg-soft), var(--card));
-    border: 1px solid var(--stroke); border-radius: var(--radius); padding: 20px;
-    box-shadow: var(--shadow); position: sticky; top: 20px;
-  }
-  .side h3 { margin: 0 0 4px; font-size: 1.1rem; display: flex; align-items: center; gap: 8px; }
-  .side .sub { font-size: .8rem; color: var(--faint); margin: 0 0 16px; }
-  .saved-empty { color: var(--faint); font-size: .88rem; text-align: center; padding: 30px 10px; line-height: 1.5; }
-  .saved-list { display: flex; flex-direction: column; gap: 11px; }
-  .saved-item { background: var(--card-2); border: 1px solid var(--stroke); border-radius: 13px; padding: 13px 14px; position: relative; }
-  .saved-item h4 { margin: 0 0 5px; font-size: .95rem; line-height: 1.25; padding-right: 22px; }
+  .side { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; position: sticky; top: 18px; }
+  .side h3 { margin: 0 0 4px; font-size: 1rem; font-weight: 600; }
+  .side .sub { font-size: .78rem; color: var(--faint); margin: 0 0 14px; }
+  .saved-empty { color: var(--faint); font-size: .86rem; text-align: center; padding: 26px 8px; line-height: 1.5; }
+  .saved-list { display: flex; flex-direction: column; gap: 10px; }
+  .saved-item { background: #fff; border: 1px solid var(--line); border-radius: 11px; padding: 12px; position: relative; }
+  .saved-item h4 { margin: 0 0 5px; font-size: .9rem; line-height: 1.3; font-weight: 600; padding-right: 20px; }
   .saved-item .st { font-size: .74rem; color: var(--faint); display: flex; justify-content: space-between; gap: 8px; }
-  .saved-item .st .rev { color: var(--accent-2); font-weight: 600; }
-  .remove { position: absolute; top: 10px; right: 10px; background: none; border: none; color: var(--faint); cursor: pointer; font-size: 1.1rem; line-height: 1; padding: 2px 5px; border-radius: 6px; }
-  .remove:hover { color: var(--high); background: rgba(255,107,139,.1); }
+  .saved-item .st .rev { color: var(--muted); font-weight: 600; font-variant-numeric: tabular-nums; }
+  .remove { position: absolute; top: 9px; right: 9px; background: none; border: none; color: var(--faint); cursor: pointer; font-size: 1rem; line-height: 1; padding: 2px 5px; border-radius: 5px; }
+  .remove:hover { color: var(--text); background: var(--panel-2); }
 
-  .disclaimer { text-align: center; color: var(--faint); font-size: .78rem; margin-top: 30px; line-height: 1.5; }
+  .disclaimer { color: var(--faint); font-size: .77rem; margin-top: 30px; line-height: 1.55; text-align: center; max-width: 720px; margin-left: auto; margin-right: auto; }
 
   /* ---------- Modal ---------- */
-  .modal-backdrop { position: fixed; inset: 0; background: rgba(9,10,20,.72); backdrop-filter: blur(4px); display: none; align-items: center; justify-content: center; padding: 20px; z-index: 50; }
+  .modal-backdrop { position: fixed; inset: 0; background: rgba(24,24,27,.4); backdrop-filter: blur(2px); display: none; align-items: center; justify-content: center; padding: 20px; z-index: 50; }
   .modal-backdrop.open { display: flex; }
-  .modal { background: linear-gradient(180deg, var(--bg-soft), var(--card)); border: 1px solid var(--stroke); border-radius: 18px; padding: 26px; max-width: 460px; width: 100%; box-shadow: var(--shadow); }
-  .modal h3 { margin: 0 0 6px; font-size: 1.2rem; }
-  .modal p { color: var(--muted); font-size: .9rem; line-height: 1.55; margin: 0 0 18px; }
-  .modal label { display: block; font-size: .74rem; text-transform: uppercase; letter-spacing: .06em; color: var(--faint); font-weight: 600; margin: 0 0 8px; }
-  .modal input, .modal select { width: 100%; background: var(--card-2); border: 1px solid var(--stroke); color: var(--text); border-radius: 12px; padding: 12px 14px; font-size: .95rem; font-family: inherit; margin-bottom: 16px; }
-  .modal input:focus, .modal select:focus { outline: none; border-color: var(--accent); }
-  .modal .hint { font-size: .78rem; color: var(--faint); margin: -8px 0 18px; line-height: 1.5; }
-  .modal .hint a { color: #a9b4ff; }
+  .modal { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 24px; max-width: 440px; width: 100%; box-shadow: var(--shadow); }
+  .modal h3 { margin: 0 0 6px; font-size: 1.1rem; font-weight: 600; }
+  .modal p { color: var(--muted); font-size: .88rem; line-height: 1.55; margin: 0 0 18px; }
+  .modal label { display: block; font-size: .68rem; text-transform: uppercase; letter-spacing: .07em; color: var(--faint); font-weight: 600; margin: 0 0 7px; }
+  .modal input, .modal select { width: 100%; background: #fff; border: 1px solid var(--line-strong); color: var(--text); border-radius: 10px; padding: 11px 13px; font-size: .92rem; font-family: inherit; margin-bottom: 15px; }
+  .modal input:focus, .modal select:focus { outline: none; border-color: var(--text); }
+  .modal .hint { font-size: .78rem; color: var(--faint); margin: -7px 0 16px; line-height: 1.5; }
+  .modal .hint a { color: var(--muted); }
   .modal-actions { display: flex; gap: 10px; justify-content: flex-end; }
-  .modal-actions .btn { padding: 11px 20px; font-size: .92rem; }
-  .modal-close { background: var(--card-2); border: 1px solid var(--stroke); color: var(--muted); }
+  .modal-actions .btn { padding: 10px 18px; font-size: .9rem; }
+  .modal-close { background: #fff; border: 1px solid var(--line-strong); color: var(--muted); }
 
-  /* ---------- Responsive ---------- */
+  /* ---------- Lightbox ---------- */
+  .lightbox { position: fixed; inset: 0; background: rgba(24,24,27,.86); display: none; align-items: center; justify-content: center; padding: 24px; z-index: 60; cursor: zoom-out; }
+  .lightbox.open { display: flex; }
+  .lightbox img { max-width: 100%; max-height: 90vh; border-radius: 10px; box-shadow: 0 20px 60px -20px rgba(0,0,0,.6); }
+
   @media (max-width: 900px) {
     .layout { grid-template-columns: 1fr; }
     .side { position: relative; top: 0; display: none; }
@@ -268,10 +222,11 @@
     .saved-toggle { display: inline-flex; }
   }
   @media (max-width: 520px) {
-    .wrap { padding: 20px 14px 60px; }
-    .card h2 { font-size: 1.25rem; }
+    .wrap { padding: 20px 16px 60px; }
+    .idea h2 { font-size: 1.16rem; }
     .btn-primary { min-width: unset; }
     .match-count { width: 100%; margin-left: 0; }
+    .idea-head { flex-direction: column; }
   }
 </style>
 </head>
@@ -279,11 +234,8 @@
 <div class="wrap">
   <header>
     <div class="brand">
-      <div class="spark">✦</div>
-      <div>
-        TrendSpark
-        <small>Live, non-obvious business ideas</small>
-      </div>
+      <div class="brand-mark">✦</div>
+      <div class="wordmark">TrendSpark<small>Live business ideas</small></div>
     </div>
     <div class="header-actions">
       <button class="pill-btn" id="keyBtn"><span class="key-dot" id="keyDot"></span> API key</button>
@@ -295,16 +247,16 @@
     <main>
       <section class="controls">
         <div class="filter-row">
-          <div class="filter-label">Investment tier</div>
+          <div class="label">Investment tier</div>
           <div class="chips" id="tierChips"></div>
         </div>
         <div class="filter-row">
-          <div class="filter-label">Trend category</div>
+          <div class="label">Trend category</div>
           <div class="chips" id="trendChips"></div>
         </div>
         <div class="actions">
-          <button class="btn btn-primary" id="generateBtn">⚡ Generate 5 live ideas</button>
-          <button class="btn btn-ghost" id="surpriseBtn">🎲 Surprise me</button>
+          <button class="btn btn-primary" id="generateBtn">Generate 5 live ideas</button>
+          <button class="btn btn-ghost" id="surpriseBtn">Surprise me</button>
           <span class="match-count" id="matchCount"></span>
         </div>
         <div style="margin-top:12px;">
@@ -314,20 +266,20 @@
 
       <section class="stage" id="stage">
         <div class="empty-state">
-          <div class="big">💡</div>
+          <div class="big">◇</div>
           <h3>Five fresh ideas, researched on demand</h3>
-          <p>Set your filters, then hit <b>Generate 5 live ideas</b> — TrendSpark researches current trends and news, then invents five non-obvious, globally viable businesses at once.</p>
+          <p>Set your filters, then generate five non-obvious, globally viable business ideas — each with AI-generated concept images so you can picture it.</p>
         </div>
       </section>
 
       <p class="disclaimer">
-        Ideas and all financial figures are AI-generated rough estimates grounded in web research — illustrative only, not guarantees or investment advice.
-        Real results vary by market, execution, and effort. Always verify before acting.
+        Ideas and financial figures are AI-generated rough estimates grounded in web research; concept images are AI-generated illustrations, not real products.
+        Illustrative only — not guarantees or investment advice. Verify before acting.
       </p>
     </main>
 
     <aside class="side" id="sidePanel">
-      <h3>★ Saved ideas</h3>
+      <h3>Saved ideas</h3>
       <p class="sub">Bookmarks live in memory for this session only.</p>
       <div id="savedContainer">
         <div class="saved-empty">Nothing saved yet.<br />Hit <b>Save</b> on any idea you like.</div>
@@ -340,7 +292,7 @@
 <div class="modal-backdrop" id="keyModal">
   <div class="modal">
     <h3>Connect Claude</h3>
-    <p>TrendSpark generates ideas live by calling the Claude API directly from your browser, using web search to ground each idea in current trends. Your key is kept <b>in memory for this session only</b> — never stored or sent anywhere but Anthropic.</p>
+    <p>TrendSpark generates ideas live by calling the Claude API directly from your browser, using web search to ground each idea in current trends. Your key is kept <b>in memory for this session only</b> — never stored or sent anywhere but Anthropic. (Concept images use a separate keyless service.)</p>
     <label for="keyInput">Anthropic API key</label>
     <input id="keyInput" type="password" placeholder="sk-ant-..." autocomplete="off" spellcheck="false" />
     <div class="hint">Get one at <a href="https://console.anthropic.com/settings/keys" target="_blank" rel="noopener">console.anthropic.com</a>. Because the key sits in the browser tab, use this for personal/demo work — not a public site.</div>
@@ -356,112 +308,65 @@
   </div>
 </div>
 
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox"><img id="lightboxImg" alt="Concept image" /></div>
+
 <script>
 /* ============================================================
    TREND METADATA + OFFLINE SAMPLES (fallback only)
    ============================================================ */
-const TREND_META = {
-  "AI": "🤖",
-  "Creator economy": "🎨",
-  "Aging population": "👵",
-  "Climate/sustainability": "🌱",
-  "Remote work": "🌐",
-  "Health/longevity": "❤️",
-  "Niche B2B services": "🧩",
-  "Products": "📦"
-};
+const TREND_LIST = [
+  "AI", "Creator economy", "Aging population", "Climate/sustainability",
+  "Remote work", "Health/longevity", "Niche B2B services", "Products"
+];
 const TIER_LABEL = { low: "Low", medium: "Medium", high: "High" };
-const TRENDS = Object.keys(TREND_META);
+const TRENDS = TREND_LIST;
 const BATCH_SIZE = 5;
+const IMAGES_PER = 3;
 
-// Offline seed set — shown via "browse offline samples" or on API failure.
 const SAMPLE_IDEAS = [
-  {
-    title: "AI Grant-Writing Copilot for Small NGOs", trend: "AI",
+  { title: "AI Grant-Writing Copilot for Small NGOs", trend: "AI",
     description: "A subscription tool that ingests a nonprofit's mission and past reports, then drafts tailored grant applications matched to open funding calls. It lets tiny NGOs compete with well-staffed ones.",
-    investmentUSD: "$3,000 – $9,000", investmentTier: "medium",
-    avgMonthlyRevenueUSD: "$4,000 – $12,000", avgMonthlyProfitUSD: "$2,500 – $8,000",
-    timeToProfit: "4–7 months", whyGlobal: "Grant-seeking nonprofits exist in every country and mostly write in major languages.",
-    skillsNeeded: ["Prompt engineering", "No-code SaaS", "B2B sales"]
-  },
-  {
-    title: "Digital Reminiscence Kits for Elder-Care Homes", trend: "Aging population",
+    investmentUSD: "$3,000 – $9,000", investmentTier: "medium", avgMonthlyRevenueUSD: "$4,000 – $12,000", avgMonthlyProfitUSD: "$2,500 – $8,000",
+    timeToProfit: "4–7 months", whyGlobal: "Grant-seeking nonprofits exist in every country and mostly write in major languages.", skillsNeeded: ["Prompt engineering", "No-code SaaS", "B2B sales"] },
+  { title: "Digital Reminiscence Kits for Elder-Care Homes", trend: "Aging population",
     description: "Themed multimedia packs (music, photos, prompts by decade and region) that care homes use for dementia reminiscence therapy on a tablet. Sold as a recurring content subscription per facility.",
-    investmentUSD: "$2,500 – $8,000", investmentTier: "medium",
-    avgMonthlyRevenueUSD: "$3,000 – $9,000", avgMonthlyProfitUSD: "$2,000 – $6,000",
-    timeToProfit: "4–8 months", whyGlobal: "Aging populations and care homes exist worldwide; content localizes by era and geography.",
-    skillsNeeded: ["Content curation", "Licensing", "Care-sector sales"]
-  },
-  {
-    title: "Carbon-Footprint Labeling for Small E-commerce Brands", trend: "Climate/sustainability",
+    investmentUSD: "$2,500 – $8,000", investmentTier: "medium", avgMonthlyRevenueUSD: "$3,000 – $9,000", avgMonthlyProfitUSD: "$2,000 – $6,000",
+    timeToProfit: "4–8 months", whyGlobal: "Aging populations and care homes exist worldwide; content localizes by era and geography.", skillsNeeded: ["Content curation", "Licensing", "Care-sector sales"] },
+  { title: "Carbon-Footprint Labeling for Small E-commerce Brands", trend: "Climate/sustainability",
     description: "A plug-in that estimates and displays a per-product carbon footprint badge on independent online stores. Eco-conscious shoppers convert better and brands get an edge without hiring consultants.",
-    investmentUSD: "$4,000 – $11,000", investmentTier: "medium",
-    avgMonthlyRevenueUSD: "$3,500 – $11,000", avgMonthlyProfitUSD: "$2,000 – $7,000",
-    timeToProfit: "5–9 months", whyGlobal: "E-commerce platforms are global and sustainability messaging resonates across most markets.",
-    skillsNeeded: ["App integrations", "Lifecycle basics", "Content marketing"]
-  },
-  {
-    title: "Async Onboarding Video Library for Remote Teams", trend: "Remote work",
+    investmentUSD: "$4,000 – $11,000", investmentTier: "medium", avgMonthlyRevenueUSD: "$3,500 – $11,000", avgMonthlyProfitUSD: "$2,000 – $7,000",
+    timeToProfit: "5–9 months", whyGlobal: "E-commerce platforms are global and sustainability messaging resonates across most markets.", skillsNeeded: ["App integrations", "Lifecycle basics", "Content marketing"] },
+  { title: "Async Onboarding Video Library for Remote Teams", trend: "Remote work",
     description: "A done-for-you service producing a modular library of short onboarding videos so distributed startups stop repeating the same live calls. Includes a searchable portal and quarterly refreshes.",
-    investmentUSD: "$2,000 – $7,000", investmentTier: "low",
-    avgMonthlyRevenueUSD: "$4,000 – $10,000", avgMonthlyProfitUSD: "$2,800 – $7,000",
-    timeToProfit: "3–6 months", whyGlobal: "Remote-first companies hire globally and onboarding pain is universal across time zones.",
-    skillsNeeded: ["Video production", "Instructional design", "B2B outreach"]
-  },
-  {
-    title: "Niche Newsletter Ghostwriting for B2B Founders", trend: "Niche B2B services",
+    investmentUSD: "$2,000 – $7,000", investmentTier: "low", avgMonthlyRevenueUSD: "$4,000 – $10,000", avgMonthlyProfitUSD: "$2,800 – $7,000",
+    timeToProfit: "3–6 months", whyGlobal: "Remote-first companies hire globally and onboarding pain is universal across time zones.", skillsNeeded: ["Video production", "Instructional design", "B2B outreach"] },
+  { title: "Niche Newsletter Ghostwriting for B2B Founders", trend: "Niche B2B services",
     description: "A productized service turning busy technical founders' voice notes into a polished weekly authority newsletter. Founders build audience and inbound leads without spending hours writing.",
-    investmentUSD: "$500 – $3,000", investmentTier: "low",
-    avgMonthlyRevenueUSD: "$4,000 – $11,000", avgMonthlyProfitUSD: "$3,200 – $8,500",
-    timeToProfit: "2–4 months", whyGlobal: "B2B founders everywhere want thought-leadership presence and hate writing.",
-    skillsNeeded: ["Ghostwriting", "Interviewing", "Content strategy"]
-  },
-  {
-    title: "AI Symptom-Journaling Companion for Chronic Illness", trend: "Health/longevity",
+    investmentUSD: "$500 – $3,000", investmentTier: "low", avgMonthlyRevenueUSD: "$4,000 – $11,000", avgMonthlyProfitUSD: "$3,200 – $8,500",
+    timeToProfit: "2–4 months", whyGlobal: "B2B founders everywhere want thought-leadership presence and hate writing.", skillsNeeded: ["Ghostwriting", "Interviewing", "Content strategy"] },
+  { title: "AI Symptom-Journaling Companion for Chronic Illness", trend: "Health/longevity",
     description: "A gentle daily-check-in app that helps chronic-illness patients log symptoms and generates clear summaries to bring to doctor visits. It improves appointments without offering diagnoses.",
-    investmentUSD: "$5,000 – $14,000", investmentTier: "high",
-    avgMonthlyRevenueUSD: "$5,500 – $15,000", avgMonthlyProfitUSD: "$3,500 – $10,000",
-    timeToProfit: "6–11 months", whyGlobal: "Chronic illness is universal and the doctor-communication gap exists everywhere.",
-    skillsNeeded: ["App development", "Health UX", "Community trust"]
-  },
-  {
-    title: "Cohort-Based Micro-Apprenticeships in Emerging Tools", trend: "Creator economy",
+    investmentUSD: "$5,000 – $14,000", investmentTier: "high", avgMonthlyRevenueUSD: "$5,500 – $15,000", avgMonthlyProfitUSD: "$3,500 – $10,000",
+    timeToProfit: "6–11 months", whyGlobal: "Chronic illness is universal and the doctor-communication gap exists everywhere.", skillsNeeded: ["App development", "Health UX", "Community trust"] },
+  { title: "Cohort-Based Micro-Apprenticeships in Emerging Tools", trend: "Creator economy",
     description: "Short, project-based apprenticeship cohorts teaching fast-moving skills where learners ship a real deliverable. Employers scout graduates from a talent showcase.",
-    investmentUSD: "$2,000 – $7,000", investmentTier: "low",
-    avgMonthlyRevenueUSD: "$4,500 – $13,000", avgMonthlyProfitUSD: "$3,200 – $9,000",
-    timeToProfit: "3–6 months", whyGlobal: "Demand for emerging-tool skills is global and cohorts run fully online.",
-    skillsNeeded: ["Teaching", "Community", "Employer relations"]
-  },
-  {
-    title: "Modular Cable & Adapter Organizer for Digital Nomads", trend: "Products",
+    investmentUSD: "$2,000 – $7,000", investmentTier: "low", avgMonthlyRevenueUSD: "$4,500 – $13,000", avgMonthlyProfitUSD: "$3,200 – $9,000",
+    timeToProfit: "3–6 months", whyGlobal: "Demand for emerging-tool skills is global and cohorts run fully online.", skillsNeeded: ["Teaching", "Community", "Employer relations"] },
+  { title: "Modular Cable & Adapter Organizer for Digital Nomads", trend: "Products",
     description: "A compact, magnetic organizer that keeps a remote worker's cables, dongles and SD cards tidy in a carry-on. Sold direct-to-consumer and shipped worldwide as a light, flat parcel.",
-    investmentUSD: "$4,000 – $12,000", investmentTier: "medium",
-    avgMonthlyRevenueUSD: "$5,000 – $16,000", avgMonthlyProfitUSD: "$3,000 – $9,000",
-    timeToProfit: "4–8 months", whyGlobal: "Small and light enough to ship affordably almost anywhere; remote workers are everywhere.",
-    skillsNeeded: ["Product design", "Overseas sourcing", "DTC marketing"]
-  },
-  {
-    title: "Seed-Paper Plant Markers for Balcony Gardeners", trend: "Products",
-    description: "Plantable, biodegradable plant labels printed with herb names that sprout wildflowers when the season ends. A low-cost, featherweight physical product sold in kits to the urban-gardening boom.",
-    investmentUSD: "$1,500 – $6,000", investmentTier: "low",
-    avgMonthlyRevenueUSD: "$3,000 – $9,000", avgMonthlyProfitUSD: "$1,800 – $5,500",
-    timeToProfit: "3–6 months", whyGlobal: "Featherweight product ships worldwide by letter-rate mail; balcony gardening is a global trend.",
-    skillsNeeded: ["Sourcing", "Packaging design", "Marketplace marketing"]
-  }
+    investmentUSD: "$4,000 – $12,000", investmentTier: "medium", avgMonthlyRevenueUSD: "$5,000 – $16,000", avgMonthlyProfitUSD: "$3,000 – $9,000",
+    timeToProfit: "4–8 months", whyGlobal: "Small and light enough to ship affordably almost anywhere; remote workers are everywhere.", skillsNeeded: ["Product design", "Overseas sourcing", "DTC marketing"] },
+  { title: "Seed-Paper Plant Markers for Balcony Gardeners", trend: "Products",
+    description: "Plantable, biodegradable plant labels printed with herb names that sprout wildflowers when the season ends. A featherweight physical product sold in kits to the urban-gardening boom.",
+    investmentUSD: "$1,500 – $6,000", investmentTier: "low", avgMonthlyRevenueUSD: "$3,000 – $9,000", avgMonthlyProfitUSD: "$1,800 – $5,500",
+    timeToProfit: "3–6 months", whyGlobal: "Featherweight product ships worldwide by letter-rate mail; balcony gardening is a global trend.", skillsNeeded: ["Sourcing", "Packaging design", "Marketplace marketing"] }
 ];
 
 /* ============================================================
    STATE
    ============================================================ */
-const state = {
-  tier: null,
-  trend: null,
-  saved: [],
-  lastTitles: [],
-  apiKey: "",
-  model: "claude-opus-4-8",
-  busy: false
-};
+const state = { tier: null, trend: null, saved: [], lastTitles: [], apiKey: "", model: "claude-opus-4-8", busy: false };
 let currentBatch = [];
 
 /* ============================================================
@@ -475,7 +380,7 @@ function buildTierChips() {
   tierChipsEl.innerHTML = '';
   ['low', 'medium', 'high'].forEach(t => {
     const b = document.createElement('button');
-    b.className = `chip tier-${t}` + (state.tier === t ? ' active' : '');
+    b.className = 'chip' + (state.tier === t ? ' active' : '');
     b.textContent = TIER_LABEL[t] + ' investment';
     b.onclick = () => { state.tier = state.tier === t ? null : t; buildTierChips(); updateMatchCount(); };
     tierChipsEl.appendChild(b);
@@ -486,7 +391,7 @@ function buildTrendChips() {
   TRENDS.forEach(tr => {
     const b = document.createElement('button');
     b.className = 'chip' + (state.trend === tr ? ' active' : '');
-    b.textContent = `${TREND_META[tr]} ${tr}`;
+    b.textContent = tr;
     b.onclick = () => { state.trend = state.trend === tr ? null : tr; buildTrendChips(); updateMatchCount(); };
     trendChipsEl.appendChild(b);
   });
@@ -497,87 +402,102 @@ function activeFilterLabel() {
   if (state.trend) parts.push(state.trend);
   return parts.length ? parts.join(' · ') : 'all categories';
 }
-function updateMatchCount() {
-  matchCountEl.innerHTML = `Generating within <b>${esc(activeFilterLabel())}</b>`;
-}
+function updateMatchCount() { matchCountEl.innerHTML = `Within <b>${esc(activeFilterLabel())}</b>`; }
 
 /* ============================================================
-   HELPERS + CARD MARKUP
+   HELPERS + LIST MARKUP
    ============================================================ */
 const stage = document.getElementById('stage');
-
-function esc(str) {
-  return String(str == null ? '' : str).replace(/[&<>"']/g, c =>
-    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-}
+function esc(str) { return String(str == null ? '' : str).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
 function isSaved(idea) { return state.saved.some(s => s.title === idea.title); }
 function domainOf(url) { try { return new URL(url).hostname.replace(/^www\./, ''); } catch { return ''; } }
 
-function ideaCardHTML(idea, live, index) {
+/* Keyless AI concept images (loaded as plain <img>; no key, no CORS issue) */
+const IMG_ANGLES = [
+  "product concept, studio photography, clean neutral background",
+  "realistic scene of it being used in everyday life",
+  "minimal brand hero shot, marketing photography",
+  "close-up detail, editorial photography"
+];
+function hashSeed(str) { let h = 2166136261; for (let i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); } return (h >>> 0) % 100000; }
+function imgUrl(idea, angleIndex, w, h) {
+  const angle = IMG_ANGLES[angleIndex % IMG_ANGLES.length];
+  const prompt = `${idea.title}. ${angle}. Concept for a ${idea.trend} business. photorealistic, high detail, no text, no watermark`;
+  const seed = (hashSeed(idea.title) + angleIndex * 7919) % 100000;
+  return `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=${w}&height=${h}&nologo=true&seed=${seed}&model=flux`;
+}
+
+function ideaHTML(idea, index) {
   const saved = isSaved(idea);
   const skills = (idea.skillsNeeded || []).map(s => `<span class="skill">${esc(s)}</span>`).join('');
   const signalHtml = idea.trendSignal
-    ? `<div class="signal"><span class="ico">📡</span><span class="txt"><b>Current signal:</b> ${esc(idea.trendSignal)}</span></div>` : '';
+    ? `<div class="signal"><span class="ico">◎</span><span class="txt"><b>Current signal:</b> ${esc(idea.trendSignal)}</span></div>` : '';
   const sources = (idea.sources || []).filter(s => s && s.url);
   const sourcesHtml = sources.length
-    ? `<div class="sources"><div class="src-label">Grounded in</div><div class="src-list">${sources.slice(0, 3).map(s =>
-        `<a href="${esc(s.url)}" target="_blank" rel="noopener">↗ ${esc(s.title || domainOf(s.url) || s.url)} <span class="dom">${esc(domainOf(s.url))}</span></a>`
-      ).join('')}</div></div>` : '';
+    ? `<div class="sources"><span class="s-k">Grounded in</span>${sources.slice(0, 3).map(s =>
+        `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.title || domainOf(s.url) || s.url)}</a>`).join('')}</div>` : '';
   const tierClass = ['low', 'medium', 'high'].includes(idea.investmentTier) ? idea.investmentTier : 'medium';
 
+  const thumbs = Array.from({ length: IMAGES_PER }, (_, i) => {
+    const small = imgUrl(idea, i, 480, 360);
+    const big = imgUrl(idea, i, 1024, 768);
+    return `<button class="thumb" data-full="${esc(big)}" aria-label="Concept image ${i + 1} for ${esc(idea.title)}">
+      <img src="${esc(small)}" loading="lazy" alt="${esc(idea.title)} concept ${i + 1}"
+           onload="this.classList.add('loaded')" onerror="this.closest('.thumb').classList.add('failed')" />
+    </button>`;
+  }).join('');
+
   return `
-    <article class="card enter" style="animation-delay:${index * 60}ms">
-      <div class="card-top">
-        <div class="tag-group"><span class="trend-tag">${TREND_META[idea.trend] || '✦'} ${esc(idea.trend)}</span></div>
-        <span class="tier-pill ${tierClass}">${TIER_LABEL[tierClass]} investment</span>
+    <li class="idea enter" style="animation-delay:${index * 50}ms">
+      <div class="idea-head">
+        <div class="idea-titles">
+          <span class="trend-label">${esc(idea.trend)}</span>
+          <h2>${esc(idea.title)}</h2>
+        </div>
+        <div class="idea-head-right">
+          <span class="tier tier-${tierClass}">${TIER_LABEL[tierClass]}</span>
+          <button class="save-btn ${saved ? 'saved' : ''}" data-title="${esc(idea.title)}">${saved ? 'Saved ✓' : 'Save'}</button>
+        </div>
       </div>
-      <h2>${esc(idea.title)}</h2>
       <p class="desc">${esc(idea.description)}</p>
       ${signalHtml}
-      <div class="stats">
-        <div class="stat"><div class="stat-label">💵 Startup cost</div><div class="stat-value">${esc(idea.investmentUSD)}</div></div>
-        <div class="stat rev"><div class="stat-label">📈 Monthly revenue</div><div class="stat-value">${esc(idea.avgMonthlyRevenueUSD)}</div></div>
-        <div class="stat profit"><div class="stat-label">💰 Monthly profit</div><div class="stat-value">${esc(idea.avgMonthlyProfitUSD)}</div></div>
-        <div class="stat"><div class="stat-label">⏱ Time to profit</div><div class="stat-value">${esc(idea.timeToProfit)}</div></div>
+      <div class="thumbs">${thumbs}</div>
+      <div class="thumbs-note">AI-generated concept images — illustrative only.</div>
+      <div class="statline">
+        <div class="stat"><div class="stat-k">Startup cost</div><div class="stat-value">${esc(idea.investmentUSD)}</div></div>
+        <div class="stat"><div class="stat-k">Monthly revenue</div><div class="stat-value">${esc(idea.avgMonthlyRevenueUSD)}</div></div>
+        <div class="stat"><div class="stat-k">Monthly profit</div><div class="stat-value">${esc(idea.avgMonthlyProfitUSD)}</div></div>
+        <div class="stat"><div class="stat-k">Time to profit</div><div class="stat-value">${esc(idea.timeToProfit)}</div></div>
       </div>
-      <div class="meta-row"><div class="meta"><span class="k">Why it works globally</span><b>${esc(idea.whyGlobal)}</b></div></div>
+      <div class="metaline"><span class="k">Why global</span><b>${esc(idea.whyGlobal)}</b></div>
       <div class="skills">${skills}</div>
       ${sourcesHtml}
-      <div class="card-actions">
-        <button class="save-btn ${saved ? 'saved' : ''}" data-title="${esc(idea.title)}">${saved ? '★ Saved' : '☆ Save idea'}</button>
-      </div>
-    </article>`;
+    </li>`;
 }
 
 function renderBatch(ideas, opts = {}) {
   currentBatch = ideas;
   const live = !!opts.live;
-  const titleBar = live
-    ? `<span class="live-dot"></span> ${ideas.length} live idea${ideas.length === 1 ? '' : 's'}`
-    : `<span class="sample-tag">${ideas.length} offline sample${ideas.length === 1 ? '' : 's'}</span>`;
-
   stage.innerHTML = `
     <div class="batch-head">
       <div>
-        <div class="bh-title">${titleBar}</div>
-        <span class="bh-sub">${live ? 'Researched from current trends' : 'Curated examples'} · ${esc(activeFilterLabel())}</span>
+        <div class="bh-title">${ideas.length} ${live ? 'live' : 'sample'} idea${ideas.length === 1 ? '' : 's'}</div>
+        <div class="bh-sub">${live ? 'Researched from current trends' : 'Curated examples'} · ${esc(activeFilterLabel())}</div>
       </div>
-      <button class="regen-btn" id="genMore">↻ Generate 5 more</button>
+      <button class="regen-btn" id="genMore">Generate 5 more</button>
     </div>
-    <div class="idea-grid">${ideas.map((idea, i) => ideaCardHTML(idea, live, i)).join('')}</div>`;
+    <ul class="idea-list">${ideas.map((idea, i) => ideaHTML(idea, i)).join('')}</ul>`;
 
   document.getElementById('genMore').onclick = () => (opts.regen ? opts.regen() : null);
-  stage.querySelectorAll('.save-btn').forEach(btn => {
-    btn.onclick = () => toggleSaveByTitle(btn.getAttribute('data-title'));
-  });
-
+  stage.querySelectorAll('.save-btn').forEach(btn => { btn.onclick = () => toggleSaveByTitle(btn.getAttribute('data-title')); });
+  stage.querySelectorAll('.thumb').forEach(t => { t.onclick = () => { if (!t.classList.contains('failed')) openLightbox(t.getAttribute('data-full')); }; });
   state.lastTitles = ideas.map(i => i.title);
 }
 
 function renderLoading() {
   stage.innerHTML = `
     <div class="loading">
-      <div class="orbit"></div>
+      <div class="spinner"></div>
       <h3>Researching current trends…</h3>
       <p class="status" id="statusLine">Warming up the idea engine</p>
       <p class="subhint" id="subHint"></p>
@@ -600,11 +520,10 @@ function cycleStatus() {
     if (e) { e.style.opacity = 0; setTimeout(() => { e.textContent = LOADING_MESSAGES[i]; e.style.opacity = 1; }, 200); }
   }, 3200);
 }
-
 function renderError(message, retry) {
   stage.innerHTML = `
     <div class="empty-state error">
-      <div class="big">⚠️</div>
+      <div class="big">!</div>
       <h3>Couldn't generate ideas</h3>
       <p>${esc(message)}</p>
       <div style="margin-top:16px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
@@ -616,32 +535,39 @@ function renderError(message, retry) {
   document.getElementById('errSample').onclick = () => showOfflineSamples();
 }
 
+/* ---------- Lightbox ---------- */
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightboxImg');
+function openLightbox(url) { lightboxImg.src = url; lightbox.classList.add('open'); }
+lightbox.onclick = () => { lightbox.classList.remove('open'); lightboxImg.src = ''; };
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && lightbox.classList.contains('open')) lightbox.click(); });
+
 /* ============================================================
    CLAUDE API — live batch generation grounded in web search
    ============================================================ */
 const TODAY = "2026-07-04";
-const REQUEST_TIMEOUT_MS = 150000; // hard cap so the browser never hangs
+const REQUEST_TIMEOUT_MS = 150000;
 
 const SYSTEM_PROMPT =
 `You are TrendSpark's idea engine — a sharp business analyst who invents non-obvious, globally viable business ideas grounded in genuinely current trends and news.
 
-Today's date is ${TODAY}. First, use the web_search tool a few times to research what is happening RIGHT NOW (the last few months) in the relevant trend area(s). Anchor each idea in a specific, recent development, shift, product, regulation, or signal you find — not evergreen generalities. Do a small, efficient set of searches — do not over-search.
+Today's date is ${TODAY}. First, use the web_search tool a few times to research what is happening RIGHT NOW (the last few months) in the relevant trend area(s). Anchor each idea in a specific, recent development you find — not evergreen generalities. Do a small, efficient set of searches — do not over-search.
 
 Then propose EXACTLY ${BATCH_SIZE} ideas. Rules:
-- The ${BATCH_SIZE} ideas must be genuinely DISTINCT from each other — different sub-niches, customers, and angles, not variations of one theme.
+- The ${BATCH_SIZE} ideas must be genuinely DISTINCT from each other — different sub-niches, customers, and angles.
 - Each title is specific and concrete, never vague.
 - Genuinely uncommon: niche micro-SaaS, localized AI services, specialized consulting, digital products for underserved niches, or distinctive physical products. NEVER propose generic ideas like dropshipping, a food truck, a general social-media agency, print-on-demand t-shirts, or "an online course platform".
 - Each must be doable from anywhere with only an internet connection — no country-specific licensing dependency.
 - Financial figures must be realistic and grounded — no fantasy like "$50k/month passive". Monthly profit must be lower than monthly revenue, expressed as ranges.
 - The "trend" field must be EXACTLY one of: AI, Creator economy, Aging population, Climate/sustainability, Remote work, Health/longevity, Niche B2B services, Products.
-- "Products" means small, LIGHTWEIGHT physical goods that can ship worldwide cheaply (light parcel / letter rate), are high-margin and design-led or niche — NOT generic dropshipping or print-on-demand basics.
+- "Products" means small, LIGHTWEIGHT physical goods that can ship worldwide cheaply (light parcel / letter rate), high-margin and design-led or niche — NOT generic dropshipping or print-on-demand basics.
 
 After researching, reply with one short sentence, then a single fenced \`\`\`json code block containing a JSON ARRAY of exactly ${BATCH_SIZE} idea objects, and nothing after it. Each object:
 {
   "title": string,
   "trend": one of the 8 categories above,
   "description": string (2-3 sentences on what it actually does),
-  "trendSignal": string (one line naming the SPECIFIC current development/news this rides on),
+  "trendSignal": string (one line naming the SPECIFIC current development this rides on),
   "investmentUSD": string range e.g. "$2,000 – $8,000",
   "investmentTier": "low" | "medium" | "high",
   "avgMonthlyRevenueUSD": string range,
@@ -669,58 +595,36 @@ async function callClaude(userPrompt, onStatus) {
     model: state.model,
     max_tokens: 8000,
     system: SYSTEM_PROMPT,
-    // Basic web search — fast. (The _20260209 variant runs server-side code
-    // execution for dynamic filtering, which made generation take minutes.)
     tools: [{ type: "web_search_20250305", name: "web_search", max_uses: 4 }],
     messages: [{ role: "user", content: userPrompt }]
   };
-
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
-
   try {
     let data;
     for (let round = 0; round < 3; round++) {
       const resp = await fetch("https://api.anthropic.com/v1/messages", {
-        method: "POST",
-        signal: controller.signal,
-        headers: {
-          "content-type": "application/json",
-          "x-api-key": state.apiKey,
-          "anthropic-version": "2023-06-01",
-          "anthropic-dangerous-direct-browser-access": "true"
-        },
+        method: "POST", signal: controller.signal,
+        headers: { "content-type": "application/json", "x-api-key": state.apiKey, "anthropic-version": "2023-06-01", "anthropic-dangerous-direct-browser-access": "true" },
         body: JSON.stringify(body)
       });
-
       if (!resp.ok) {
         let detail = `HTTP ${resp.status}`;
         try { const e = await resp.json(); if (e.error && e.error.message) detail = e.error.message; } catch {}
         if (resp.status === 401) detail = "Invalid API key. Open the API key panel and check it.";
         throw new Error(detail);
       }
-
       data = await resp.json();
-      if (data.stop_reason === "pause_turn") {
-        body.messages.push({ role: "assistant", content: data.content });
-        if (onStatus) onStatus();
-        continue;
-      }
+      if (data.stop_reason === "pause_turn") { body.messages.push({ role: "assistant", content: data.content }); if (onStatus) onStatus(); continue; }
       break;
     }
-
     if (data.stop_reason === "refusal") throw new Error("The model declined this request. Try different filters or Surprise me.");
-
     const text = (data.content || []).filter(b => b.type === "text").map(b => b.text).join("\n").trim();
     return extractIdeas(text);
   } catch (err) {
-    if (err.name === "AbortError") {
-      throw new Error("Timed out after ~2.5 minutes. Web research can be slow on Opus — try the Sonnet model (API key panel) or a narrower filter.");
-    }
+    if (err.name === "AbortError") throw new Error("Timed out after ~2.5 minutes. Web research can be slow on Opus — try the Sonnet model (API key panel) or a narrower filter.");
     throw err;
-  } finally {
-    clearTimeout(timer);
-  }
+  } finally { clearTimeout(timer); }
 }
 
 function normalizeIdea(idea) {
@@ -733,7 +637,6 @@ function normalizeIdea(idea) {
   if (!Array.isArray(idea.sources)) idea.sources = [];
   return idea;
 }
-
 function extractIdeas(text) {
   if (!text) throw new Error("Empty response from the model.");
   let raw = null;
@@ -742,14 +645,9 @@ function extractIdeas(text) {
   if (!raw) { const arr = text.match(/\[[\s\S]*\]/); if (arr) raw = arr[0]; }
   if (!raw) { const obj = text.match(/\{[\s\S]*\}/); if (obj) raw = obj[0]; }
   if (!raw) throw new Error("Could not read structured ideas from the response.");
-
   let parsed;
-  try { parsed = JSON.parse(raw); }
-  catch { throw new Error("The model's output wasn't valid JSON. Try again."); }
-
-  let list = Array.isArray(parsed) ? parsed
-    : Array.isArray(parsed.ideas) ? parsed.ideas
-    : [parsed];
+  try { parsed = JSON.parse(raw); } catch { throw new Error("The model's output wasn't valid JSON. Try again."); }
+  let list = Array.isArray(parsed) ? parsed : Array.isArray(parsed.ideas) ? parsed.ideas : [parsed];
   list = list.map(normalizeIdea).filter(Boolean);
   if (!list.length) throw new Error("No usable ideas came back. Try again.");
   return list;
@@ -760,68 +658,44 @@ function extractIdeas(text) {
    ============================================================ */
 const generateBtn = document.getElementById('generateBtn');
 const surpriseBtn = document.getElementById('surpriseBtn');
-
 function setBusy(b) {
-  state.busy = b;
-  generateBtn.disabled = b;
-  surpriseBtn.disabled = b;
-  const gm = document.getElementById('genMore');
-  if (gm) gm.disabled = b;
+  state.busy = b; generateBtn.disabled = b; surpriseBtn.disabled = b;
+  const gm = document.getElementById('genMore'); if (gm) gm.disabled = b;
 }
-
 async function generate(ignoreFilters) {
   if (state.busy) return;
   if (!state.apiKey) { openKeyModal(); return; }
-
   const run = () => generate(ignoreFilters);
   setBusy(true);
   renderLoading();
   const timer = cycleStatus();
-  const hint = setTimeout(() => {
-    const s = document.getElementById('subHint');
-    if (s) s.textContent = "Deep web research can take a little while on Opus — hang tight, or pick Sonnet in the API key panel for speed.";
-  }, 40000);
-
+  const hint = setTimeout(() => { const s = document.getElementById('subHint'); if (s) s.textContent = "Deep web research can take a little while on Opus — hang tight, or pick Sonnet in the API key panel for speed."; }, 40000);
   try {
     const ideas = await callClaude(buildUserPrompt(ignoreFilters));
     renderBatch(ideas, { live: true, regen: run });
   } catch (err) {
     renderError(err.message || String(err), run);
-  } finally {
-    clearInterval(timer);
-    clearTimeout(hint);
-    setBusy(false);
-  }
+  } finally { clearInterval(timer); clearTimeout(hint); setBusy(false); }
 }
-
-/* Offline samples — respects filters, no API needed */
 function pickSamples(n) {
-  let pool = SAMPLE_IDEAS.filter(i =>
-    (!state.tier || i.investmentTier === state.tier) &&
-    (!state.trend || i.trend === state.trend));
+  let pool = SAMPLE_IDEAS.filter(i => (!state.tier || i.investmentTier === state.tier) && (!state.trend || i.trend === state.trend));
   if (pool.length === 0) pool = SAMPLE_IDEAS.slice();
   const shuffled = pool.slice();
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-  }
+  for (let i = shuffled.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]; }
   return shuffled.slice(0, Math.min(n, shuffled.length));
 }
-function showOfflineSamples() {
-  renderBatch(pickSamples(BATCH_SIZE), { live: false, regen: showOfflineSamples });
-}
+function showOfflineSamples() { renderBatch(pickSamples(BATCH_SIZE), { live: false, regen: showOfflineSamples }); }
 
 /* ============================================================
    SAVE / BOOKMARK
    ============================================================ */
 const savedContainer = document.getElementById('savedContainer');
 const savedBadge = document.getElementById('savedBadge');
-
 function syncSaveButtons() {
   stage.querySelectorAll('.save-btn').forEach(btn => {
     const on = state.saved.some(s => s.title === btn.getAttribute('data-title'));
     btn.classList.toggle('saved', on);
-    btn.textContent = on ? '★ Saved' : '☆ Save idea';
+    btn.textContent = on ? 'Saved ✓' : 'Save';
   });
 }
 function toggleSaveByTitle(title) {
@@ -829,29 +703,19 @@ function toggleSaveByTitle(title) {
   if (!idea) return;
   if (state.saved.some(s => s.title === title)) state.saved = state.saved.filter(s => s.title !== title);
   else state.saved.push(idea);
-  syncSaveButtons();
-  renderSaved();
+  syncSaveButtons(); renderSaved();
 }
-function removeSaved(title) {
-  state.saved = state.saved.filter(s => s.title !== title);
-  renderSaved();
-  syncSaveButtons();
-}
+function removeSaved(title) { state.saved = state.saved.filter(s => s.title !== title); renderSaved(); syncSaveButtons(); }
 function renderSaved() {
   savedBadge.textContent = state.saved.length;
-  if (state.saved.length === 0) {
-    savedContainer.innerHTML = `<div class="saved-empty">Nothing saved yet.<br />Hit <b>Save</b> on any idea you like.</div>`;
-    return;
-  }
+  if (state.saved.length === 0) { savedContainer.innerHTML = `<div class="saved-empty">Nothing saved yet.<br />Hit <b>Save</b> on any idea you like.</div>`; return; }
   savedContainer.innerHTML = `<div class="saved-list">` + state.saved.map(s => `
     <div class="saved-item">
       <button class="remove" title="Remove" data-title="${esc(s.title)}">✕</button>
       <h4>${esc(s.title)}</h4>
-      <div class="st"><span>${TREND_META[s.trend] || '✦'} ${esc(s.trend)}</span><span class="rev">${esc(s.avgMonthlyRevenueUSD)}/mo</span></div>
+      <div class="st"><span>${esc(s.trend)}</span><span class="rev">${esc(s.avgMonthlyRevenueUSD)}/mo</span></div>
     </div>`).join('') + `</div>`;
-  savedContainer.querySelectorAll('.remove').forEach(btn => {
-    btn.onclick = () => removeSaved(btn.getAttribute('data-title'));
-  });
+  savedContainer.querySelectorAll('.remove').forEach(btn => { btn.onclick = () => removeSaved(btn.getAttribute('data-title')); });
 }
 
 /* ============================================================
@@ -861,24 +725,12 @@ const keyModal = document.getElementById('keyModal');
 const keyInput = document.getElementById('keyInput');
 const modelSelect = document.getElementById('modelSelect');
 const keyDot = document.getElementById('keyDot');
-
 function refreshKeyDot() { keyDot.classList.toggle('on', !!state.apiKey); }
-function openKeyModal() {
-  keyInput.value = state.apiKey;
-  modelSelect.value = state.model;
-  keyModal.classList.add('open');
-  setTimeout(() => keyInput.focus(), 50);
-}
+function openKeyModal() { keyInput.value = state.apiKey; modelSelect.value = state.model; keyModal.classList.add('open'); setTimeout(() => keyInput.focus(), 50); }
 function closeKeyModal() { keyModal.classList.remove('open'); }
-
 document.getElementById('keyBtn').onclick = openKeyModal;
 document.getElementById('keyCancel').onclick = closeKeyModal;
-document.getElementById('keySave').onclick = () => {
-  state.apiKey = keyInput.value.trim();
-  state.model = modelSelect.value;
-  refreshKeyDot();
-  closeKeyModal();
-};
+document.getElementById('keySave').onclick = () => { state.apiKey = keyInput.value.trim(); state.model = modelSelect.value; refreshKeyDot(); closeKeyModal(); };
 keyModal.addEventListener('click', e => { if (e.target === keyModal) closeKeyModal(); });
 keyInput.addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('keySave').click(); });
 
@@ -888,7 +740,6 @@ keyInput.addEventListener('keydown', e => { if (e.key === 'Enter') document.getE
 generateBtn.onclick = () => generate(false);
 surpriseBtn.onclick = () => generate(true);
 document.getElementById('offlineBtn').onclick = () => showOfflineSamples();
-
 const sidePanel = document.getElementById('sidePanel');
 document.getElementById('savedToggle').onclick = () => sidePanel.classList.toggle('open');
 
